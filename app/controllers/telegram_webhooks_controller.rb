@@ -101,19 +101,19 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def welcome_message
-    %(👋 Hi, I will help you eat more. Here's how it works:
+    %(👋 Hi, welcome to the idea machine. Here's how it works:
 
-Every time you eat a meal. Snap a picture and send it to me.
+Everytime you have an idea, snap a picture and send it to me.
 Make sure to send it as a photo and not a file.
 You can add a caption to the photo if you'd like.
 
 Type /meals to see all the meals you've eaten.
 Type /link to get a secret link to your private profile
 
-You can turn on /reminders to get notified when you haven't eaten in a while.
+You can turn on /reminders to get notified when you haven't uploaded an idea in a while.
 Type /reminders to toggle your reminders on/off.
 
-Bon appetite!
+Happy ideation! 💡
 )
   end
 end
