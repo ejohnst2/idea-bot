@@ -4,8 +4,6 @@ body
   font-family: "Avenir Next", "AvenirNext", Helvetica, Arial, sans-serif
 
 .wrapper
-  background-image: asset-url("donuts.png")
-  background-position: center center
   display: flex
   height: 100vh
   width: 100vw
@@ -28,10 +26,10 @@ body
   display: flex
   flex-direction: column
   align-items: center
-  margin-bottom: 5rem // for wip widget
+  margin-bottom: 5rem
 
   .avatar
-    background-image: asset-url("eatmore.png")
+    background-image: asset-url("change-init-logo.png")
     background-size: contain
     background-repeat: no-repeat
     background-position: center center
@@ -78,27 +76,3 @@ body
       width: 3rem
   a:hover
     background-image: linear-gradient(-180deg, darken(#37AEE2 , 10%) 0%, darken(#1E96C8, 10%) 100%)
-
-.wip
-  a:link, a:visited
-    position: absolute
-    bottom: 0.5rem
-    right: 0.5rem
-    display: flex
-    align-items: center
-    padding: 0.4rem 0.6rem
-    background: white
-    text-decoration: none
-    border-radius: 0.5rem
-    color: black
-    box-shadow: 0 0 0.5rem rgba(0,0,0,0.2)
-    .icon
-    .text
-      display: none
-      font-size: 0.9em
-      margin-right: 0.5em
-  a:hover
-    box-shadow: 0 0 0.5rem rgba(0,0,0,0.5)
-
-    .text
-      display: block
