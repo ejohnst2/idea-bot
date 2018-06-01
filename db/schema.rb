@@ -38,8 +38,6 @@ ActiveRecord::Schema.define(version: 2018_03_22_075558) do
     t.string "username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "reminders_enabled", default: true
-    t.datetime "reminded_at"
     t.string "profile_token"
     t.index ["profile_token"], name: "index_users_on_profile_token", unique: true
   end
