@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateMeals < ActiveRecord::Migration[5.1]
+class CreateIdeas < ActiveRecord::Migration[5.1]
   def change
-    create_table :meals do |t|
+    create_table :ideas do |t|
       t.string :name
       t.text :image_data
 
