@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Meal < ApplicationRecord
+class Idea < ApplicationRecord
   include ImageUploader::Attachment.new(:image)
 
   belongs_to :user

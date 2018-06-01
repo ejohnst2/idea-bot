@@ -37,5 +37,5 @@
 = month_calendar do |date|
   .date= date
   - date_range = date.beginning_of_day..date.end_of_day
-  - @user.meals.where(created_at: date_range).each do |meal|
-    = image_tag meal.image.url
+  - @user.ideas.where(created_at: date_range).each do |idea|
+    = image_tag idea.image.url

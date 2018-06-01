@@ -13,20 +13,20 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def message(*)
     return unless photo?
 
-    previous_meal_at = last_meal_at
-    create_meal
+    previous_idea_at = last_idea_at
+    create_idea
 
-    status = if previous_meal_at
-               "previous meal was #{time_ago_in_words(previous_meal_at)} ago"
+    status = if previous_idea_at
+               "previous idea was #{time_ago_in_words(previous_idea_at)} ago"
              else
-               "Your first logged meal. Yay!"
+               "Your first logged idea. Yay!"
              end
 
-    respond_with :message, text: "Your meal was logged! (#{status})"
+    respond_with :message, text: "Your idea was logged! (#{status})"
   end
 
   def last(*)
-    respond_with :message, text: "Your last meal was #{time_ago_in_words(last_meal_at)} ago"
+    respond_with :message, text: "Your last idea was #{time_ago_in_words(last_idea_at)} ago"
   end
 
   def link(*)
@@ -34,18 +34,18 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def botstats(*)
-    respond_with :message, text: "#{User.count} users, #{Meal.count} meals."
+    respond_with :message, text: "#{User.count} users, #{Idea.count} ideas."
   end
 
-  def meals(*)
-    lines = user.meals.order(created_at: :desc).collect do |meal|
-      "#{time_ago_in_words meal.created_at} ago – #{meal.name || "(no description)"}"
+  def ideas(*)
+    lines = user.ideas.order(created_at: :desc).collect do |idea|
+      "#{time_ago_in_words idea.created_at} ago – #{idea.name || "(no description)"}"
     end
 
     text = if lines.any?
              lines.join("\n")
            else
-             "No meals logged yet."
+             "No ideas logged yet."
            end
 
     respond_with :message, text: text
@@ -75,14 +75,14 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     user
   end
 
-  def create_meal
-    user.meals.create name: payload["caption"],
+  def create_idea
+    user.ideas.create name: payload["caption"],
                       image_remote_url: photo_url,
                       created_at: payload_timestamp
   end
 
-  def last_meal_at
-    user.meals.maximum(:created_at)
+  def last_idea_at
+    user.ideas.maximum(:created_at)
   end
 
   def payload_timestamp
@@ -109,7 +109,7 @@ Everytime you have an idea, snap a picture and send it to me.
 Make sure to send it as a photo and not a file.
 You can add a caption to the photo if you'd like.
 
-Type /meals to see all the meals you've eaten.
+Type /ideas to see all the ideas you've eaten.
 Type /link to get a secret link to your private profile
 
 You can turn on /reminders to get notified when you haven't uploaded an idea in a while.

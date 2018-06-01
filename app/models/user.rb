@@ -3,12 +3,12 @@
 class User < ApplicationRecord
   has_secure_token :profile_token
 
-  has_many :meals, dependent: :destroy
+  has_many :ideas, dependent: :destroy
 
   scope :needs_reminding, lambda {
-    joins(:meals)
+    joins(:ideas)
       .where(reminders_enabled: true)
-      .where.not("meals.created_at > ?", 6.hours.ago)
+      .where.not("ideas.created_at > ?", 6.hours.ago)
       .where.not("reminded_at > ?", 3.hours.ago)
       .distinct
   }
@@ -19,8 +19,8 @@ class User < ApplicationRecord
     profile_token
   end
 
-  def last_meal_at
-    meals.newest.created_at
+  def last_idea_at
+    ideas.newest.created_at
   end
 
   def toggle_reminders
