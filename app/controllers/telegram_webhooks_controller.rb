@@ -51,18 +51,6 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     respond_with :message, text: text
   end
 
-  def reminders(*)
-    user.toggle_reminders
-
-    text = if user.reminders_enabled?
-             "🚨 Reminders are turned on. Type /reminders to turn them off."
-           else
-             "😶 Reminders are turned off. Type /reminders to turn them on."
-           end
-
-    respond_with :message, text: text
-  end
-
   rescue_from Telegram::Bot::Forbidden do
     # Forbidden: bot was blocked by the user
   end
@@ -111,9 +99,6 @@ You can add a caption to the photo if you'd like.
 
 Type /ideas to see all the ideas you've eaten.
 Type /link to get a secret link to your private profile
-
-You can turn on /reminders to get notified when you haven't uploaded an idea in a while.
-Type /reminders to toggle your reminders on/off.
 
 Happy ideation! 💡
 )
