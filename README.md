@@ -25,3 +25,10 @@ When things get weird run `rails db:reset`
 
 [Shrine](https://shrinerb.com) used for simpler setup. You can do
 this in [`config/initializers/shrine.rb`](config/initializers/shrine.rb).
+
+### heroku production deployment
+
+```
+heroku run rake db:schema:load
+heroku run rails telegram:bot:set_webhook
+```
