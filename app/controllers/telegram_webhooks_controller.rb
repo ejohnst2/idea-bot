@@ -4,6 +4,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   include ActionView::Helpers::DateHelper
   include Rails.application.routes.url_helpers
 
+  Rails.application.routes.default_url_options[:host] = ENV.fetch("HOST")
+
   def start(*)
     respond_with :message, text: welcome_message
   end
