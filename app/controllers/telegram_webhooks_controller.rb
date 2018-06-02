@@ -7,16 +7,18 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   Rails.application.routes.default_url_options[:host] = ENV.fetch("HOST")
 
   def start(*)
-    respond_with :message, text: welcome_message
-
-    announce_new_group_member
+    if User.exists?(username: user.username)
+      puts %(user #{user.username} tried triggering /start again)
+      respond_with :message, text: "You're already started! Welcome back 👋"
+    else
+      respond_with :message, text: welcome_message
+      announce_new_group_member
+    end
   end
 
   def announce_new_group_member(*)
-    puts User
-
     if User.exists?(username: user.username)
-      puts %(user #{user.username} already a part of the group)
+      puts %(user #{user.username} tried announcing themselves again)
     else
       # Send the Telegram group an update stating the new member has joined
       bot.send_message(
