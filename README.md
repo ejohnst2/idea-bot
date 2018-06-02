@@ -1,3 +1,8 @@
+### Highlights
+[telegram-bot-rb](https://github.com/telegram-bot-rb/telegram-bot)
+
+---
+
 ### Installation
 
 1. `git clone https://github.com/ChangeInit/idea-bot`
@@ -32,3 +37,8 @@ this in [`config/initializers/shrine.rb`](config/initializers/shrine.rb).
 heroku run rake db:schema:load
 heroku run rails telegram:bot:set_webhook
 ```
+
+
+
+Heroku for hosting
+AWS S3 for file hosting
