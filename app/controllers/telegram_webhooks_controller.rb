@@ -13,11 +13,17 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def announce_new_group_member(*)
-    # Send the Telegram group an update stating the new member has joined
-    bot.send_message(
-      chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-      text: %(@#{user.username} has joined the party!)
-    )
+    puts User
+
+    if User.exists?(username: user.username)
+      puts %(user #{user.username} already a part of the group)
+    else
+      # Send the Telegram group an update stating the new member has joined
+      bot.send_message(
+        chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+        text: %(@#{user.username} has joined the party!)
+      )
+    end
   end
 
   def message(*)
