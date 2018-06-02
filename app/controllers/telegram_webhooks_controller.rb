@@ -9,6 +9,10 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def start(*)
     respond_with :message, text: welcome_message
 
+    announce_new_group_member
+  end
+
+  def announce_new_group_member(*)
     # Send the Telegram group an update stating the new member has joined
     bot.send_message(
       chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
