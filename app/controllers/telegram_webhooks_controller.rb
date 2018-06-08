@@ -85,7 +85,6 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     user.ideas.create name: payload["caption"],
                       image_remote_url: photo_url,
                       created_at: payload_timestamp
-    share_new_idea
   end
 
   def share_new_idea
