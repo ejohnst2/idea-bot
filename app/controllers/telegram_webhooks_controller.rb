@@ -6,11 +6,11 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   Rails.application.routes.default_url_options[:host] = ENV.fetch("HOST")
 
-  @@app_name = "idea dojo"
+  @app_name = "idea dojo"
 
   def start(*)
     if User.exists?(username: user.username)
-      puts %(user #{user.username} tried triggering /start again)
+      Rails.logger.debug %(user #{user.username} tried triggering /start again)
       respond_with :message, text: "You're already started! Welcome back 👋"
     else
       respond_with :message, text: welcome_message
@@ -20,12 +20,12 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   def announce_new_group_member(*)
     if User.exists?(username: user.username)
-      puts %(user #{user.username} tried announcing themselves again)
+      Rails.logger.debug %(user #{user.username} tried announcing themselves again)
     else
       # Send the Telegram group an update stating the new member has joined
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-        text: %(Welcome to #@@app_name, @#{user.username} 👋!)
+        text: %(Welcome to #{@app_name}, @#{user.username} 👋!)
       )
     end
   end
@@ -36,16 +36,14 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     previous_idea_at = last_idea_at
     create_idea
 
-    status = if previous_idea_at
-            bot.send_message(
-              chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-              text: %(💡 @#{user.username} shared a new idea! Previous idea was #{time_ago_in_words(previous_idea_at)} ago)
-            )
-             else
-               %(💡 @#{user.username} shared their first idea!)
-             end
-
-    # respond_with :message, text: "(#{status})"
+    if previous_idea_at
+      bot.send_message(
+        chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+        text: %(💡 @#{user.username} shared a new idea! Previous idea was #{time_ago_in_words(previous_idea_at)} ago)
+      )
+      else
+        %(💡 @#{user.username} shared their first idea!)
+    end
   end
 
   def create_idea
@@ -124,7 +122,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def welcome_message
-    %(👋 Hi, welcome to the #@@app_name. Here's how it works:
+    %(👋 Hi, welcome to the #{@app_name}. Here's how it works:
 
 Everytime you have an idea, snap a picture and send it to me.
 Make sure to send it as a photo and not a file.
