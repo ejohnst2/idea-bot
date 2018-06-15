@@ -23,7 +23,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       # Send the Telegram group an update stating the new member has joined
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-        text: %(@#{user.username} has joined the party!)
+        text: %(@#{user.username}!)
       )
     end
   end
@@ -35,13 +35,32 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     create_idea
 
     status = if previous_idea_at
-               "previous idea was #{time_ago_in_words(previous_idea_at)} ago"
+            bot.send_message(
+              chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+              text: %(💡 @#{user.username} shared a new idea! Previous idea was #{time_ago_in_words(previous_idea_at)} ago)
+            )
              else
-               "Your first logged idea. Yay!"
+               %(💡 @#{user.username} shared their first idea!)
              end
 
-    respond_with :message, text: "Your idea was logged! (#{status})"
+    respond_with :message, text: "(#{status})"
   end
+
+  def create_idea
+    user.ideas.create name: payload["caption"],
+                      image_remote_url: photo_url,
+                      created_at: payload_timestamp
+    # share_new_idea
+  end
+
+  # shares new idea to the Telegram group
+  # might scope into standalone method in the future to consolidate methods with messages sending
+  # def share_new_idea
+  #   bot.send_message(
+  #     chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+  #     text: %(💡 @#{user.username} created a new idea! )
+  #   )
+  # end
 
   def last(*)
     respond_with :message, text: "Your last idea was #{time_ago_in_words(last_idea_at)} ago"
@@ -81,21 +100,6 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     user
   end
 
-  def create_idea
-    user.ideas.create name: payload["caption"],
-                      image_remote_url: photo_url,
-                      created_at: payload_timestamp
-    share_new_idea
-  end
-
-  # shares new idea to the Telegram group
-  def share_new_idea
-    bot.send_message(
-      chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-      text: %(💡 @#{user.username} created a new idea!)
-    )
-  end
-
   def last_idea_at
     user.ideas.maximum(:created_at)
   end
@@ -118,7 +122,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def welcome_message
-    %(👋 Hi, welcome to the idea machine. Here's how it works:
+    %(👋 Hi, welcome to the idea dojo. Here's how it works:
 
 Everytime you have an idea, snap a picture and send it to me.
 Make sure to send it as a photo and not a file.
