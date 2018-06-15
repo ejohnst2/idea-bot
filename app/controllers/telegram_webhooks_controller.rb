@@ -45,7 +45,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
                %(💡 @#{user.username} shared their first idea!)
              end
 
-    respond_with :message, text: "(#{status})"
+    # respond_with :message, text: "(#{status})"
   end
 
   def create_idea
