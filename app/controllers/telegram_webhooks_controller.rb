@@ -11,7 +11,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def start(*)
     if User.exists?(username: user.username)
       Rails.logger.debug %(user #{user.username} tried triggering /start again)
-      respond_with :message, text: "You're already started! Welcome back 👋"
+      respond_with :message, text: "You're already an #{@app_name} member! Welcome back 👋"
     else
       respond_with :message, text: welcome_message
       announce_new_group_member
