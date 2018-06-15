@@ -6,12 +6,12 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   Rails.application.routes.default_url_options[:host] = ENV.fetch("HOST")
 
-  @app_name = "idea dojo"
+  @@app_name = "idea dojo"
 
   def start(*)
     if User.exists?(username: user.username)
       Rails.logger.debug %(user #{user.username} tried triggering /start again)
-      respond_with :message, text: "You're already an #{@app_name} member! Welcome back 👋"
+      respond_with :message, text: "You're already an #@@app_name member! Welcome back 👋"
     else
       respond_with :message, text: welcome_message
       announce_new_group_member
@@ -25,7 +25,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       # Send the Telegram group an update stating the new member has joined
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-        text: %(Welcome to #{@app_name}, @#{user.username} 👋!)
+        text: %(Welcome to #@@app_name, @#{user.username} 👋!)
       )
     end
   end
@@ -122,7 +122,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def welcome_message
-    %(👋 Hi, welcome to the #{@app_name}. Here's how it works:
+    %(👋 Hi, welcome to the #@@app_name. Here's how it works:
 
 Everytime you have an idea, snap a picture and send it to me.
 Make sure to send it as a photo and not a file.
