@@ -32,3 +32,4 @@
 
 # Ignore credentials
 *.env
+.env
