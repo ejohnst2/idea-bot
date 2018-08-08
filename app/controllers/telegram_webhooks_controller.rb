@@ -31,10 +31,15 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def message(*)
-    return unless photo?
+    if photo?
+      create_photo_idea
+      notify_new_idea
+    end
+  end
 
+  # notfiies group of a new idea
+  def notify_new_idea
     previous_idea_at = last_idea_at
-    create_photo_idea
 
     if previous_idea_at
       bot.send_message(
@@ -108,6 +113,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     Time.zone.at payload["date"]
   end
 
+  # checks to make sure photo exists
   def photo?
     payload["photo"].present?
   end
