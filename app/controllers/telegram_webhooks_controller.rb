@@ -8,6 +8,17 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   @@app_name = "idea dojo"
 
+  def idea(*)
+    idea_payload = self.payload["text"]
+
+    # removes the prepended /idea from the string
+    idea_trimmed_string = idea_payload.split(' ')[1..-1].join(' ')
+
+    user.ideas.create name: idea_trimmed_string
+
+    notify_new_idea
+  end
+
   def start(*)
     if User.exists?(username: user.username)
       Rails.logger.debug %(user #{user.username} tried triggering /start again)
@@ -31,10 +42,16 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def message(*)
-    return unless photo?
+    # checks if theres a photo, and creates an idea if there is
+    if photo?
+      create_photo_idea
+      notify_new_idea
+    end
+  end
 
+  # notfiies group of a new idea
+  def notify_new_idea
     previous_idea_at = last_idea_at
-    create_idea
 
     if previous_idea_at
       bot.send_message(
@@ -46,7 +63,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     end
   end
 
-  def create_idea
+  def create_photo_idea
     user.ideas.create name: payload["caption"],
                       image_remote_url: photo_url,
                       created_at: payload_timestamp
@@ -108,6 +125,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     Time.zone.at payload["date"]
   end
 
+  # checks to make sure photo exists
   def photo?
     payload["photo"].present?
   end
