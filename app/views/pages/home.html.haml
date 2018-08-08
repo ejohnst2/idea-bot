@@ -2,10 +2,8 @@
 
   .modal
     .avatar
-    -# %h1 Eat More
-    %h2 @#{ENV.fetch("TELEGRAM_BOT_USERNAME")}
     %p Inspiring the creation of a vision, one idea at a time.
     %p Track your ideas by simply sending a quick photo and a caption.
     %p The bot will share your idea to our curated community of makers.
 
-    = link_to "Add to Telegram", "https://t.me/#{ENV.fetch("TELEGRAM_BOT_USERNAME")}"
+    = link_to "Join Group", "#{ENV.fetch("TELEGRAM_GROUP_LINK")}"

@@ -9,7 +9,7 @@
 
 2. Create a Telegram bot using [@BotFather](https://t.me/botfather)
 
-3. Setup your .env with the appropriate keys
+3. Setup your .env with the appropriate keys (Please see `example.env` for an example .env file setup)
 
 4. `bundle install`
 
