@@ -34,7 +34,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     return unless photo?
 
     previous_idea_at = last_idea_at
-    create_idea
+    create_photo_idea
 
     if previous_idea_at
       bot.send_message(
@@ -46,7 +46,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     end
   end
 
-  def create_idea
+  def create_photo_idea
     user.ideas.create name: payload["caption"],
                       image_remote_url: photo_url,
                       created_at: payload_timestamp
