@@ -80,7 +80,11 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   # end
 
   def last(*)
-    respond_with :message, text: "Your last idea was #{time_ago_in_words(last_idea_at)} ago"
+    if user.ideas.exists?
+      respond_with :message, text: "Your last idea was #{time_ago_in_words(last_idea_at)} ago"
+    else
+      respond_with :message, text: "You have no ideas yet"
+    end
   end
 
   def link(*)
