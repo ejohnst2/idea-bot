@@ -67,20 +67,6 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     user.ideas.create name: payload["caption"],
                       image_remote_url: photo_url,
                       created_at: payload_timestamp
-    # share_new_idea
-  end
-
-  # shares new idea to the Telegram group
-  # might scope into standalone method in the future to consolidate methods with messages sending
-  # def share_new_idea
-  #   bot.send_message(
-  #     chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-  #     text: %(💡 @#{user.username} created a new idea! )
-  #   )
-  # end
-
-  def last(*)
-    respond_with :message, text: "Your last idea was #{time_ago_in_words(last_idea_at)} ago"
   end
 
   def link(*)
@@ -140,16 +126,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def welcome_message
-    %(👋 Hi, welcome to the #@@app_name. Here's how it works:
-
-Everytime you have an idea, snap a picture and send it to me.
-Make sure to send it as a photo and not a file.
-You can add a caption to the photo if you'd like.
-
-Type /ideas to see all the ideas you've eaten.
-Type /link to get a secret link to your private profile
-
-Happy ideation! 💡
+    %(👋 Welcome to the #@@app_name. You're now signed up! You can join @IdeaDojo to start chatting.
+      Create a new idea by either snapping a picture and sending it to me, or use the /idea command to add a new idea without a photo.
 )
   end
 end
