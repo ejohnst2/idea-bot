@@ -5,14 +5,14 @@
         <p><%= flash[:error] %></p>
       </div>
     <% end %>
-    <label class="amount">
-      <span>Amount: $5.00</span>
-    </label>
   </article>
 
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
+          data-description="Subscribe to the Idea Dojo"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-amount="500"
+          data-label="Join Us"
+          data-allow-remember-me=false
           data-locale="auto"></script>
 <% end %>
