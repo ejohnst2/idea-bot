@@ -17,10 +17,14 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     end
   end
 
+  def email_collection(*)
+    respond_with :message, text: "Please provide your email address (same as you used for payment)."
+  end
+
   def inline_keyboard!(*)
       respond_with :message, text: "You're already started! Welcome back 👋", reply_markup: {
       inline_keyboard: [
-        [{text: "I've joined @IdeaDojo", callback_data: 'alert'}],
+        [{text: "Join the Idea Dojo group", url: ENV.fetch('TELEGRAM_GROUP_LINK')}],
       ],
     }
   end
