@@ -9,10 +9,27 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def start(*)
     if User.exists?(username: user.username)
       puts %(user #{user.username} tried triggering /start again)
-      respond_with :message, text: "You're already started! Welcome back 👋"
+      inline_keyboard!
     else
       respond_with :message, text: welcome_message
+      inline_keyboard!
       announce_new_group_member
+    end
+  end
+
+  def inline_keyboard!(*)
+      respond_with :message, text: "You're already started! Welcome back 👋", reply_markup: {
+      inline_keyboard: [
+        [{text: "I've joined @IdeaDojo", callback_data: 'alert'}],
+      ],
+    }
+  end
+
+  def callback_query(data)
+    if data == 'alert'
+      answer_callback_query t('.alert'), show_alert: true
+    else
+      answer_callback_query t('.no_alert')
     end
   end
 
