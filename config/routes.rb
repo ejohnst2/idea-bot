@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   telegram_webhook TelegramWebhooksController
 
   resources :users, only: [:show]
+  resources :charges
 
   root to: "pages#home"
 end
