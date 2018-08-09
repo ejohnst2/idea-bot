@@ -18,7 +18,7 @@ class ChargesController < ApplicationController
       :currency    => 'usd'
     )
 
-    UserMailer.welcome_email(params[:stripeEmail]).deliver_later
+    UserMailer.welcome_email(params[:stripeEmail]).deliver_now
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
