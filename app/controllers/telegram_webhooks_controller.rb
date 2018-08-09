@@ -25,13 +25,13 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     }
   end
 
-  def callback_query(data)
-    if data == 'alert'
-      answer_callback_query t('.alert'), show_alert: true
-    else
-      answer_callback_query t('.no_alert')
-    end
-  end
+  # def callback_query(data)
+  #   if data == 'alert'
+  #     answer_callback_query t('.alert'), show_alert: true
+  #   else
+  #     answer_callback_query t('.no_alert')
+  #   end
+  # end
 
   def announce_new_group_member(*)
     if User.exists?(username: user.username)
