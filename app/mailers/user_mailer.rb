@@ -1,10 +1,8 @@
 class UserMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: 'ideas@ideadojo.io'
 
-  def welcome_email
-    # @user = params[:user]
-    email = "bob@bob.com"
-    @url  = 'http://example.com/login'
-    mail(to: email, subject: 'Welcome to Idea Dojo')
+  def welcome_email(email)
+    @email = email
+    mail(to: @email, subject: 'Welcome to Idea Dojo')
   end
 end
