@@ -9,7 +9,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def start(*)
     if User.exists?(username: user.username)
       puts %(user #{user.username} tried triggering /start again)
-      inline_keyboard!
+      email_collection
+      # inline_keyboard!
     else
       respond_with :message, text: welcome_message
       inline_keyboard!
@@ -18,7 +19,12 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def email_collection(*)
-    respond_with :message, text: "Please provide your email address (same as you used for payment)."
+    respond_with :message, text: "Please provide your email address (same as you used for payment) with /email", force_reply: true
+  end
+
+  def email(*)
+    user.update email: payload['text']
+    inline_keyboard!
   end
 
   def inline_keyboard!(*)
@@ -28,6 +34,14 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       ],
     }
   end
+
+          def answer_callback_query(text, params = {})
+          params = params.merge(
+            callback_query_id: payload['id'],
+            text: payload['message'],
+          )
+          bot.answer_callback_query(params)
+        end
 
   # def callback_query(data)
   #   if data == 'alert'
