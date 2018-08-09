@@ -9,47 +9,36 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def start(*)
     if User.exists?(username: user.username)
       puts %(user #{user.username} tried triggering /start again)
-      email_collection
-      # inline_keyboard!
+      respond_with :message, text: "Welcome back! Here is a little refresher... 👋"
+      respond_with :message, text: instructions
     else
-      respond_with :message, text: welcome_message
-      inline_keyboard!
-      announce_new_group_member
+      email_collection
     end
   end
 
   def email_collection(*)
-    respond_with :message, text: "Please provide your email address (same as you used for payment) with /email", force_reply: true
+    respond_with :message, text: "Please provide your email (same as you used for payment, prepend with /email) to get started!"
   end
 
   def email(*)
     user.update email: payload['text']
-    inline_keyboard!
+
+    if payload['text'] == user.stripe_email
+      respond_with :message, text: welcome_message
+      join_group!
+      announce_new_group_member
+    else
+      "please provide same email you used for stripe"
   end
 
-  def inline_keyboard!(*)
-      respond_with :message, text: "You're already started! Welcome back 👋", reply_markup: {
+  def join_group!(*)
+      respond_with :message, text: "Get Started in the our community 👋", reply_markup: {
       inline_keyboard: [
-        [{text: "Join the Idea Dojo group", url: ENV.fetch('TELEGRAM_GROUP_LINK')}],
+        [{text: "Join Idea Dojo group", url: ENV.fetch('TELEGRAM_GROUP_LINK')}],
       ],
     }
   end
 
-          def answer_callback_query(text, params = {})
-          params = params.merge(
-            callback_query_id: payload['id'],
-            text: payload['message'],
-          )
-          bot.answer_callback_query(params)
-        end
-
-  # def callback_query(data)
-  #   if data == 'alert'
-  #     answer_callback_query t('.alert'), show_alert: true
-  #   else
-  #     answer_callback_query t('.no_alert')
-  #   end
-  # end
 
   def announce_new_group_member(*)
     if User.exists?(username: user.username)
@@ -141,6 +130,13 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     base = "https://api.telegram.org/file/bot"
 
     "#{base}#{ENV.fetch("TELEGRAM_BOT_TOKEN")}/#{file_path}"
+  end
+
+  def instructions
+    %(Type /ideas to see all the ideas you've eaten.
+Type /link to get a secret link to your private profile
+Type /instructions if you need a refresher on commands
+      )
   end
 
   def welcome_message
