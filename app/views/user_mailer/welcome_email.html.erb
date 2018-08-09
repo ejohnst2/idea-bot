@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to the Idea Dojo!</h1>
+    <p>
+      Thanks for joining idea dojo, we look forward to ideating with you.
+    </p>
+    <p>
+      Here is your private link: <%= link_to "join us in Telegram", "https://t.me/#{ENV.fetch("TELEGRAM_BOT_USERNAME")}", target: :_blank  %>
+    </p>
+    <p>
+      Thanks for joining and have a great day!
+    </p>
+    <p>Best,<br>Idea Dojo Team</p>
+  </body>
+</html>

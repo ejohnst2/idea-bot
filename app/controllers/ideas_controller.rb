@@ -20,6 +20,7 @@ class IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
 
     if @idea.save
+      UserMailer.welcome_email.deliver_now
       render json: @idea, status: :created, location: @idea
     else
       render json: @idea.errors, status: :unprocessable_entity
