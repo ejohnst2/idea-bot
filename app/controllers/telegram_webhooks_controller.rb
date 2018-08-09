@@ -22,7 +22,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def start(*)
     if User.exists?(username: user.username)
       puts %(user #{user.username} tried triggering /start again)
-      respond_with :message, text: "You're already an #@@app_name member! Welcome back 👋, here is a little refresher... 👋"
+      respond_with :message, text: "You're already a member, welcome back 👋! Here is a little refresher..."
       respond_with :message, text: instructions
     else
       email_collection
@@ -35,13 +35,14 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   def email(*)
     user.update email: payload['text']
-
-    if payload['text'] == user.stripe_email
+    #map this up against an array of stripe emails
+    if payload['text'].include? "@"
       respond_with :message, text: welcome_message
       join_group!
       announce_new_group_member
     else
-      "please provide same email you used for stripe"
+      respond_with :message, text: "please provide same email you used for stripe"
+    end
   end
 
   def join_group!(*)
@@ -157,8 +158,9 @@ Type /instructions if you need a refresher on commands
   end
 
   def welcome_message
-    %(👋 Welcome to the #@@app_name. You're now signed up! You can join @IdeaDojo to start chatting.
-      Create a new idea by either snapping a picture and sending it to me, or use the /idea command to add a new idea without a photo.
+    %(👋 Welcome to the #@@app_name. You're now signed up!
+
+Create a new idea by either snapping a picture and sending it to me, or use the /idea command to add a new idea without a photo.
 )
   end
 end

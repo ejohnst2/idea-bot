@@ -11,6 +11,9 @@ class ChargesController < ApplicationController
       :source => params[:stripeToken]
     )
 
+    ## push all users emails into an array.
+    ## cross reference the email provided in telegram up against the array.
+
     charge = Stripe::Charge.create(
       :customer    => customer.id,
       :amount      => @amount,
