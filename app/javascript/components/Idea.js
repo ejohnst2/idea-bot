@@ -15,7 +15,7 @@ const STimeStamp = styled.div`
   font-size: 0.7em;
 `;
 
-const Inline = styled.div`
+const Flex = styled.div`
   display: flex;
 `;
 
@@ -33,18 +33,18 @@ class Idea extends Component {
       return (
         <div>
           <Image alt={this.props.name} src={this.props.imageUrl} />
-          <Inline>
+          <Flex>
             <Name>{this.props.name}</Name>
             <TimeStamp />
-          </Inline>
+          </Flex>
         </div>
       );
     } else {
       return (
-        <Inline>
+        <Flex>
           <Name>💡 {this.props.name}</Name>
           <TimeStamp />
-        </Inline>
+        </Flex>
       );
     }
   }
