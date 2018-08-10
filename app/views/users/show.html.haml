@@ -1,10 +1,25 @@
 :sass
-  img
+  .feed
+    padding-top: 60px
+    flex-grow: 1
+    margin: 0 auto
+    max-width: 600px
+    position: relative
     width: 100%
-    display: block
+
+  .idea
+    margin-bottom: 28px
+
+  img
+    height: 100%
+    width: 100%
+    max-width: 600px
 
 %h1= @user.username
 
-- @user.ideas.each do |idea|
-  %div.wrap= idea.name
-  %img{ :src => idea.image_url }
+%div.feed
+  = @user.ideas.each do |idea|
+    %div.idea
+      %img{ :src => idea.image_url }
+      %div= idea.name
+      %div= idea.created_at.strftime('%F')
