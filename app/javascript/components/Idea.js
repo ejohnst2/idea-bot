@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Moment from "react-moment";
 
 const Image = styled.img`
   height: 100%;
@@ -9,24 +10,41 @@ const Image = styled.img`
 
 const Name = styled.div``;
 
-const Date = styled.div``;
+const STimeStamp = styled.div`
+  color: #bbb;
+  font-size: 0.7em;
+`;
 
-class Idea extends React.Component {
+const Inline = styled.div`
+  display: flex;
+`;
+
+class Idea extends Component {
   render() {
+    const TimeStamp = ({ date }) => {
+      return (
+        <STimeStamp>
+          <Moment fromNow>{this.props.date}</Moment>
+        </STimeStamp>
+      );
+    };
+
     if (this.props.imageUrl) {
       return (
         <div>
           <Image alt={this.props.name} src={this.props.imageUrl} />
-          <Name>{this.props.name}</Name>
-          <Date>{this.props.date}</Date>
+          <Inline>
+            <Name>{this.props.name}</Name>
+            <TimeStamp />
+          </Inline>
         </div>
       );
     } else {
       return (
-        <div>
-          <Name>{this.props.name}</Name>
-          <Date>{this.props.date}</Date>
-        </div>
+        <Inline>
+          <Name>💡 {this.props.name}</Name>
+          <TimeStamp />
+        </Inline>
       );
     }
   }
