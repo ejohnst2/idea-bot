@@ -21,7 +21,6 @@ gem "uglifier", ">= 1.3.0"
 # gem 'redis', '~> 4.0'
 gem "bootsnap", ">= 1.1.0", require: false
 gem "rubocop"
-gem "simple_calendar", "~> 2.0"
 gem "telegram-bot", github: "telegram-bot-rb/telegram-bot", branch: "master"
 
 group :development, :test do
