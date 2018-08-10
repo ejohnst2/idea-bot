@@ -32,8 +32,9 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   def email_collection(*)
     respond_with :message, text: %(
-    Please provide your email address by prepending with /email to get started!
-**make sure its the same as you used for payment**)
+    Please provide your email address to get started.
+
+Prepend with /email and make sure its the same as you used for payment.)
   end
 
   def email(*)
