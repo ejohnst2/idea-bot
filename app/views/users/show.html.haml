@@ -5,7 +5,7 @@
   .feed
     background: #fff
     flex-grow: 1
-    margin: 0 auto
+    margin: 1.5em auto
     max-width: 600px
     padding: 1.5em
     position: relative
@@ -15,7 +15,16 @@
     height: 100%
     width: 100%
 
-%h1= @user.username
+  .name
+    background: #fff
+    padding: 1.5em
+    position: relative
+    max-width: 600px
+    margin: 1em auto
+    font-size: 1.5em
+
+
+%div.name= '@' + @user.username + ' ideas'
 
 %div.feed
   - @user.ideas.each do |idea|
