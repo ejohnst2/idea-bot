@@ -21,27 +21,31 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   def start(*)
     if User.exists?(username: user.username)
-      puts %(user #{user.username} tried triggering /start again)
-      respond_with :message, text: "You're already a member, welcome back 👋! Here is a little refresher..."
-      respond_with :message, text: instructions
+      email_collection
+      # puts %(user #{user.username} tried triggering /start again)
+      # respond_with :message, text: "You're already a member, welcome back 👋! Here is a little refresher..."
+      # respond_with :message, text: instructions
     else
       email_collection
     end
   end
 
   def email_collection(*)
-    respond_with :message, text: "Please provide your email (same as you used for payment, prepend with /email) to get started!"
+    respond_with :message, text: %(
+    Please provide your email address by prepending with /email to get started!
+**make sure its the same as you used for payment**)
   end
 
   def email(*)
-    user.update email: payload['text']
+    telegram_email = payload['text'].split(' ')[1..-1].join(' ')
+    user.update email: telegram_email
     #map this up against an array of stripe emails
-    if payload['text'].include? "@"
+    if Charge.where(email: telegram_email).exists?
       respond_with :message, text: welcome_message
       join_group!
       announce_new_group_member
     else
-      respond_with :message, text: "please provide same email you used for stripe"
+      respond_with :message, text: "Try again, must match email used for payment"
     end
   end
 
@@ -160,7 +164,7 @@ Type /instructions if you need a refresher on commands
   def welcome_message
     %(👋 Welcome to the #@@app_name. You're now signed up!
 
-Create a new idea by either snapping a picture and sending it to me, or use the /idea command to add a new idea without a photo.
+Create a new idea by either snapping a picture and sending it to me, or use the /idea command to add a new idea without a photo. Go ahead, give it a try...
 )
   end
 end

@@ -3,8 +3,17 @@ class ChargesController < ApplicationController
   end
 
   def create
+
     # Amount in cents
+
     @amount = 500
+
+    # Create charge object to cross reference Telegram sign ups
+
+    Charge.create!(
+      :email => params[:stripeEmail],
+      :amount => @amount
+    )
 
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
