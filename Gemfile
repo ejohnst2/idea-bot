@@ -5,6 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.4.1"
 
+gem 'webpacker', '~> 3.5'
+gem 'react-rails', '~> 2.4.5'
+
 gem "stripe"
 gem "aws-sdk-s3", "~> 1.2"
 gem "coffee-rails", "~> 4.2"
