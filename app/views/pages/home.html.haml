@@ -1,8 +1,4 @@
 .wrapper
-
-  -# renders react component to the view
-  = react_component 'GreetUser', { :name => 'Nicholas' }
-
   .modal
     .avatar
     %h2 @#{ENV.fetch("TELEGRAM_BOT_USERNAME")}

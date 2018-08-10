@@ -7,9 +7,6 @@
     position: relative
     width: 100%
 
-  .idea
-    margin-bottom: 28px
-
   img
     height: 100%
     width: 100%
@@ -18,8 +15,5 @@
 %h1= @user.username
 
 %div.feed
-  = @user.ideas.each do |idea|
-    %div.idea
-      %img{ :src => idea.image_url }
-      %div= idea.name
-      %div= idea.created_at.strftime('%F')
+  - @user.ideas.each do |idea|
+    = react_component 'Idea', { :name => idea.name, :date => idea.created_at.strftime('%F'), :imageUrl => idea.image_url }
