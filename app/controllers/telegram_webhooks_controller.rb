@@ -21,10 +21,9 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   def start(*)
     if User.exists?(username: user.username)
-      email_collection
-      # puts %(user #{user.username} tried triggering /start again)
-      # respond_with :message, text: "You're already a member, welcome back 👋! Here is a little refresher..."
-      # respond_with :message, text: instructions
+      puts %(user #{user.username} tried triggering /start again)
+      respond_with :message, text: "You're already a member, welcome back 👋! Here is a little refresher..."
+      respond_with :message, text: instructions
     else
       email_collection
     end
