@@ -11,6 +11,10 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  # For the letter opener gem to test welcome email in dev environment
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
+
   # Show full error reports.
   config.consider_all_requests_local = true
 
