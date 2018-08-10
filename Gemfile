@@ -5,6 +5,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.4.1"
 
+# Bootstrap for landing page
+gem 'bootstrap', '~> 4.0.0.alpha3'
+
+
 gem "stripe"
 gem "aws-sdk-s3", "~> 1.2"
 gem "coffee-rails", "~> 4.2"
