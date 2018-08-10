@@ -21,13 +21,42 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   def start(*)
     if User.exists?(username: user.username)
-      Rails.logger.debug %(user #{user.username} tried triggering /start again)
-      respond_with :message, text: "You're already an #@@app_name member! Welcome back 👋"
+      puts %(user #{user.username} tried triggering /start again)
+      respond_with :message, text: "You're already a member, welcome back 👋! Here is a little refresher..."
+      respond_with :message, text: instructions
     else
-      respond_with :message, text: welcome_message
-      announce_new_group_member
+      email_collection
     end
   end
+
+  def email_collection(*)
+    respond_with :message, text: %(
+    Please provide your email address to get started.
+
+Prepend with /email and make sure its the same as you used for payment.)
+  end
+
+  def email(*)
+    telegram_email = payload['text'].split(' ')[1..-1].join(' ')
+    user.update email: telegram_email
+    #map this up against an array of stripe emails
+    if Charge.where(email: telegram_email).exists?
+      respond_with :message, text: welcome_message
+      join_group!
+      announce_new_group_member
+    else
+      respond_with :message, text: "Try again, must match email used for payment"
+    end
+  end
+
+  def join_group!(*)
+      respond_with :message, text: "Get Started in the our community 👋", reply_markup: {
+      inline_keyboard: [
+        [{text: "Join Idea Dojo group", url: ENV.fetch('TELEGRAM_GROUP_LINK')}],
+      ],
+    }
+  end
+
 
   def announce_new_group_member(*)
     if User.exists?(username: user.username)
@@ -125,9 +154,17 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     "#{base}#{ENV.fetch("TELEGRAM_BOT_TOKEN")}/#{file_path}"
   end
 
+  def instructions
+    %(Type /ideas to see all the ideas you've eaten.
+Type /link to get a secret link to your private profile
+Type /instructions if you need a refresher on commands
+      )
+  end
+
   def welcome_message
-    %(👋 Welcome to the #@@app_name. You're now signed up! You can join @IdeaDojo to start chatting.
-      Create a new idea by either snapping a picture and sending it to me, or use the /idea command to add a new idea without a photo.
+    %(👋 Welcome to the #@@app_name. You're now signed up!
+
+Create a new idea by either snapping a picture and sending it to me, or use the /idea command to add a new idea without a photo. Go ahead, give it a try...
 )
   end
 end

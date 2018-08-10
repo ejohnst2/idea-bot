@@ -30,6 +30,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-#ignore env keys
-*.env
+# Ignore keys
+
 .env
+/.env*
+*.env
