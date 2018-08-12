@@ -27,3 +27,14 @@
   // justify-content: center;
   padding: 20px 0px;
 }
+
+.welcome{
+  position: fixed;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.all{
+  z-index: -1;
+}
