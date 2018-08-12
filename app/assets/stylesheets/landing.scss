@@ -30,7 +30,14 @@
 
 .welcome{
   position: fixed;
-  top: 75%;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.welcome_two{
+  position: fixed;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

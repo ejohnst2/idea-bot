@@ -1,13 +1,22 @@
 <div class="container">
-  <div class="container welcome">
+
+  <div class="welcome_two">
     <center>
       <h3>welcome to think fish</h3>
       <p>a digital think tank for the modern maker</p>
-      <%= render 'payment_button' %>
-      <!-- <button type="button" class="btn btn-primary">go fishing</button> -->
-      <p>join <%= User.count %> other fish in the bowl</p>
-      <%#= render 'payment_button' %>
     </center>
   </div>
-  <%= render 'call_to_action' %>
-</div>
+
+  <div class="">
+    <%= render 'call_to_action' %>
+  </div>
+
+      <div class="welcome">
+        <center>
+          <%= render 'payment_button' %>
+          <p>join <%= User.count %> other fish in the bowl</p>
+        </center>
+      </div>
+
+  </div>
+

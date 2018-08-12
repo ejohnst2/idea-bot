@@ -7,7 +7,7 @@
     <% end %>
   </article>
 
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+  <script src="https://checkout.stripe.com/checkout.js" id= "buttonpay" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="thinkfish community and bot access"
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
