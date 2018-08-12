@@ -1,5 +1,8 @@
 {
   "name": "idea-bot",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "bootstrap": "^4.1.3"
+  }
 }
