@@ -1,39 +1,14 @@
 <script>
-  var s = {
-  title: {
-    el: $("h1"),
-    dots: 0
-  },
-  bowl: {
-    el: $(".bowl"),
-    top: $(".bowl .top-water")
-  }
-};
+    window.onload=function(){
+    var button = document.getElementById("fish-idea");
+    var paragraph = document.getElementById("iotd");
 
-var loading = window.setInterval(function() {
-  var str = "";
-
-  if(s.title.dots < 3) {
-    s.title.dots++;
-  } else {
-    s.title.dots = 1;
-  }
-
-  for(var i = 0; i < s.title.dots; i++) {
-    str += ".";
-  }
-
-  s.title.el.html("Loading " + str);
-}, 500);
-
-$(document).ready(function () {
-  $('[data-toggle="popover"]').popover()
-})
-
-$(document).ready("a").click(function(){
-  document.getElementById("iotd").style.display = 'none' ? '' : 'none';
-});
+    button.addEventListener("click", function(){
+    paragraph.style.display = 'none' ? '' : 'none';
+    })
+  };
 </script>
+
 <div id="iotd" style="display: none; text-align: center;">
   <p>here's an idea...</p>
   <p><%= Idea.all.sample.name  %></p>
