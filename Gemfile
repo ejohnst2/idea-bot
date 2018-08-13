@@ -13,7 +13,6 @@ gem "aws-sdk-s3", "~> 1.2"
 gem "coffee-rails", "~> 4.2"
 gem "haml-rails"
 gem "jbuilder", "~> 2.5"
-gem 'jquery-rails'
 gem "pg"
 gem "puma"
 gem "rails", "~> 5.2.0.rc1"
@@ -22,7 +21,6 @@ gem "letter_opener", group: :development
 gem "shrine"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
-# gem 'redis', '~> 4.0'
 gem "bootsnap", ">= 1.1.0", require: false
 gem "rubocop"
 gem "telegram-bot", github: "telegram-bot-rb/telegram-bot", branch: "master"
