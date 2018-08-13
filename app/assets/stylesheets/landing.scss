@@ -821,16 +821,27 @@ body {
 }
 
 #fish-idea{
-  top: 75%;
+  top: -30%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 2%;
-  border-radius: 10%;
-  font-size: 16px;
-  font-family: 'Avenir Next';
-  border-color: white;
+}
+
+.btn-treehouse {
+  color: #4e99ce;
+  width: 80%;
+  padding: 10px 15px;
+  font-size: 28px;
+  border-radius: 4px;
+    font-family: 'Avenir Next';
+    font-weight: bold;
+    background: #e8da43;
+    transition: background 0.3s ease;
+}
+.btn-treehouse:hover {
+  opacity: 1;
+  background: #3ac162;
+  text-decoration: none;
   color: white;
-  background-color: transparent;
 }
 
 .thankyou{
