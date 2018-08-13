@@ -6,7 +6,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :charges
 
-  get '/index', to: 'pages#index'
-  get '/landing', to: 'pages#index'
-  root to: "pages#home"
+  root to: "pages#index"
 end
