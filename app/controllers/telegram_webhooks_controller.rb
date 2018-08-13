@@ -57,6 +57,13 @@ Prepend with /email and make sure its the same as you used for payment.)
     }
   end
 
+    def instructions(*)
+    %(Type /ideas to see all the ideas you've eaten.
+Type /link to get a secret link to your private profile
+Type /instructions if you need a refresher on commands
+      )
+  end
+
 
   def announce_new_group_member(*)
     if User.exists?(username: user.username)
@@ -152,13 +159,6 @@ Prepend with /email and make sure its the same as you used for payment.)
     base = "https://api.telegram.org/file/bot"
 
     "#{base}#{ENV.fetch("TELEGRAM_BOT_TOKEN")}/#{file_path}"
-  end
-
-  def instructions
-    %(Type /ideas to see all the ideas you've eaten.
-Type /link to get a secret link to your private profile
-Type /instructions if you need a refresher on commands
-      )
   end
 
   def welcome_message
