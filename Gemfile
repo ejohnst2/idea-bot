@@ -21,7 +21,6 @@ gem "letter_opener", group: :development
 gem "shrine"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
-# gem 'redis', '~> 4.0'
 gem "bootsnap", ">= 1.1.0", require: false
 gem "rubocop"
 gem "telegram-bot", github: "telegram-bot-rb/telegram-bot", branch: "master"
