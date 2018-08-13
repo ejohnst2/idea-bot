@@ -1,35 +1,26 @@
 <script>
   window.onload=function() {
-  var s = {
-  title: {
-    el: $("h3"),
-    dots: 0
-  },
-  bowl: {
-    el: $(".bowl"),
-    top: $(".bowl .top-water")
-  }
-};
+   var modal = document.querySelector(".modal");
+    var trigger = document.querySelector(".trigger");
+    var closeButton = document.querySelector(".close-button");
 
-var loading = window.setInterval(function() {
-  var str = "";
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+    }
 
-  if(s.title.dots < 3) {
-    s.title.dots++;
-  } else {
-    s.title.dots = 1;
-  }
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
 
-  for(var i = 0; i < s.title.dots; i++) {
-    str += ".";
-  }
-
-  s.title.el.html("ideating now " + str);
-}, 500);
+    trigger.addEventListener("click", toggleModal);
+    closeButton.addEventListener("click", toggleModal);
+    window.addEventListener("click", windowOnClick);
 };
 </script>
 
-<div class="modal" style="text-align: center;">
+<div class="modal_two" style="text-align: center;">
         <h4>Here's your catch:</h4>
         <div class="idea">
           <p>Gaia: a self-composing music machine based on visuals of nature.</p>
@@ -47,6 +38,3 @@ var loading = window.setInterval(function() {
         <%= render 'payment_button' %>
       <p><%= 30 - User.all.count %> spots left this month</p>
 </div>
-
- <p style="margin-bottom: 2%">Do you see things and think 'what if'?</p>
-        <!-- <p><%= Idea.all.sample.name  %></p> -->
