@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :charges
 
+  get '/thankyou', to: 'pages#offer'
   root to: "pages#index"
 end
