@@ -5,9 +5,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.4.1"
 
-
-# Bootstrap for landing page
-gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'webpacker', '~> 3.5'
 gem 'react-rails', '~> 2.4.5'
 
