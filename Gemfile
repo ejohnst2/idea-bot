@@ -5,9 +5,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.4.1"
 
+
 # Bootstrap for landing page
 gem 'bootstrap', '~> 4.0.0.alpha3'
-
+gem 'webpacker', '~> 3.5'
+gem 'react-rails', '~> 2.4.5'
 
 gem "stripe"
 gem "aws-sdk-s3", "~> 1.2"
@@ -19,13 +21,13 @@ gem "pg"
 gem "puma"
 gem "rails", "~> 5.2.0.rc1"
 gem "sass-rails", "~> 5.0"
+gem "letter_opener", group: :development
 gem "shrine"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 # gem 'redis', '~> 4.0'
 gem "bootsnap", ">= 1.1.0", require: false
 gem "rubocop"
-gem "simple_calendar", "~> 2.0"
 gem "telegram-bot", github: "telegram-bot-rb/telegram-bot", branch: "master"
 
 group :development, :test do

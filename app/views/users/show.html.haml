@@ -1,41 +1,31 @@
 :sass
   body
-    color: white
-    background-color: black
-  .simple-calendar
-    th
-      border-color: #333
-      border-top: 1px #333 solid
-    td
-      padding: 0
-      position: relative
-      width: calc(100vw / 7)
-      border-color: #333
-      background: black
-      &.prev-month, &.next-month
-        background-color: #333
-      &.today
-        .date
-          color: yellow
+    background: #efefef
 
-  .date
-    background: linear-gradient(0deg, rgba(0,0,0,0), rgba(0,0,0,0.5))
-    color: white
-    padding: 0.5rem 0.5rem 1rem 0.5rem
-    position: absolute
+  .feed
+    background: #fff
+    flex-grow: 1
+    margin: 1.5em auto
+    max-width: 600px
+    padding: 1.5em
+    position: relative
     width: 100%
-    box-sizing: border-box
 
   img
+    height: 100%
     width: 100%
-    display: block
-    &:not(:first-child)
-      margin-top: 1px
 
-%h1= @user.username
+  .name
+    background: #fff
+    padding: 1.5em
+    position: relative
+    max-width: 600px
+    margin: 1em auto
+    font-size: 1.5em
 
-= month_calendar do |date|
-  .date= date
-  - date_range = date.beginning_of_day..date.end_of_day
-  - @user.ideas.where(created_at: date_range).each do |idea|
-    = image_tag idea.image.url
+
+%div.name= '@' + @user.username + ' ideas'
+
+%div.feed
+  - @user.ideas.each do |idea|
+    = react_component 'Idea', { :name => idea.name, :date => idea.created_at.strftime('%F'), :imageUrl => idea.image_url }

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
+  # Verifies that versions and hashed value of the package contents in the project's package.json
+  config.webpacker.check_yarn_integrity = true
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -10,6 +12,10 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
+
+  # For the letter opener gem to test welcome email in dev environment
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
 
   # Show full error reports.
   config.consider_all_requests_local = true

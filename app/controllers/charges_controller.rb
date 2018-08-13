@@ -3,20 +3,37 @@ class ChargesController < ApplicationController
   end
 
   def create
+
     # Amount in cents
-    @amount = 500
+
+    @amount = 1000
 
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
       :source => params[:stripeToken]
     )
 
-    charge = Stripe::Charge.create(
-      :customer    => customer.id,
-      :amount      => @amount,
-      :description => 'idea dojo customer',
-      :currency    => 'usd'
+    ## push all users emails into an array.
+    ## cross reference the email provided in telegram up against the array.
+
+    plan = Stripe::Plan.create(
+      :product     => 'prod_DPIQrGUJxwG31b',
+      :nickname    => 'monthly subscription',
+      :interval    => 'month',
+      :currency    => 'usd',
+      :amount      => @amount
     )
+
+    ## subscribe the customer to the plan
+
+    subscription = Stripe::Subscription.create(
+      :customer    => customer.id,
+      :items        => [{ plan: plan.id }]
+    )
+
+    ## trigger the welcome email
+
+    UserMailer.welcome_email(params[:stripeEmail]).deliver_now
 
     rescue Stripe::CardError => e
       flash[:error] = e.message

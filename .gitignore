@@ -30,7 +30,20 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+<<<<<<< HEAD
 #remove .env
 .env
 */.env
 
+# Ignore keys
+
+.env
+/.env*
+*.env/public/packs
+/public/packs-test
+/node_modules
+yarn-debug.log*
+.yarn-integrity
+
+*.js.map
+/public/packs/*
