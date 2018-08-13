@@ -1,5 +1,49 @@
-<div class="thankyou">
-  <h2>Thanks, you've subscribed!</h2>
-  <br>
-  <p>Please check your email for instructions and we'll see you in there.</p>
+<script>
+  window.onload=function() {
+  var s = {
+  title: {
+    el: $("h3"),
+    dots: 0
+  },
+  bowl: {
+    el: $(".bowl"),
+    top: $(".bowl .top-water")
+  }
+};
+
+var loading = window.setInterval(function() {
+  var str = "";
+
+  if(s.title.dots < 3) {
+    s.title.dots++;
+  } else {
+    s.title.dots = 1;
+  }
+
+  for(var i = 0; i < s.title.dots; i++) {
+    str += ".";
+  }
+
+  s.title.el.html("ideating now " + str);
+}, 500);
+};
+</script>
+
+<div class="modal" style="text-align: center;">
+        <h4>Here's your catch:</h4>
+        <div class="idea">
+          <p>Gaia: a self-composing music machine based on visuals of nature.</p>
+        </div>
+
+      <p>Do you observe the world and think 'what if'?</p>
+      <p>Capture these moments as easy as writing a message.</p>
+      <ul>
+        <li>Join an ideation community of makers</li>
+        <li>Ideabot tracks and organizes for you</li>
+        <li>Access a web library of your ideas</li>
+      </ul>
+      <%#= image_tag("favicon.png", class: "avatar") %>
+        <%= render 'payment_button' %>
+      <p><%= 30 - User.all.count %> spots left this month</p>
 </div>
+        <!-- <p><%= Idea.all.sample.name  %></p> -->
