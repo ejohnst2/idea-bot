@@ -17,7 +17,7 @@ class ChargesController < ApplicationController
     ## cross reference the email provided in telegram up against the array.
 
     plan = Stripe::Plan.create(
-      :product     => 'prod_DPIQrGUJxwG31b',
+      :product     => ENV.fetch("STRIPE_PRODUCT_KEY"),
       :nickname    => 'monthly subscription',
       :interval    => 'month',
       :currency    => 'usd',
