@@ -17,7 +17,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     user.ideas.create name: idea_trimmed_string
 
     notify_new_idea
-    respond_with :message, text: "You logged a new idea💡! Keep ideating 🧠..."
+    respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
   end
 
   def start(*)
@@ -83,6 +83,7 @@ Type /instructions if you need a refresher on commands
     if photo?
       create_photo_idea
       notify_new_idea
+      respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
     end
   end
 
