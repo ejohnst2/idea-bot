@@ -15,7 +15,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     idea_trimmed_string = idea_payload.split(' ')[1..-1].join(' ')
 
     user.ideas.create name: idea_trimmed_string
-
+    on_fire
     notify_new_idea
     respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
   end
@@ -107,7 +107,7 @@ Metrics:
     if previous_idea_at
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-        text: %(💡 @#{user.username} shared a new idea! Previous idea was #{time_ago_in_words(previous_idea_at)} ago)
+        text: %(💡@#{user.username} shared a new idea!)
       )
       else
         %(💡 @#{user.username} shared their first idea!)
@@ -176,6 +176,29 @@ Metrics:
   # checks to make sure photo exists
   def photo?
     payload["photo"].present?
+  end
+
+  def on_fire
+    case user.ideas.count
+    when 10
+      respond_with :message, text: "Strong start, you just logged your 10th idea 🚀🚀🚀!"
+      bot.send_message(
+        chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+        text: %(@#{user.username} logged their 10th idea 🚀🚀🚀!)
+      )
+    when 50
+      respond_with :message, text: "Look at you, just logged your 50th idea 🔥🔥🔥!"
+      bot.send_message(
+        chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+        text: %(@#{user.username} logged their 50th idea 🔥🔥🔥!)
+      )
+    when 100
+      respond_with :message, text: "Wow. You just logged your 100th idea 🤤🤤🤤!"
+      bot.send_message(
+        chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+        text: %(@#{user.username} just logged their 100th idea 🤤🤤🤤!)
+      )
+    end
   end
 
   def photo_url
