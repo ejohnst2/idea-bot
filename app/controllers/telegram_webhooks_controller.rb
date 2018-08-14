@@ -19,7 +19,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     else
       user.ideas.create name: idea_trimmed_string
       notify_new_idea
-      respond_with :message, text: "You logged a new idea💡! Keep ideating 🧠..."
+      respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
     end
   end
 
