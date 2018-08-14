@@ -1,5 +1,40 @@
-<div class="thankyou">
-  <h2>Thanks, you've subscribed!</h2>
-  <br>
-  <p>Please check your email for instructions and we'll see you in there.</p>
+<script>
+  window.onload=function() {
+   var modal = document.querySelector(".modal");
+    var trigger = document.querySelector(".trigger");
+    var closeButton = document.querySelector(".close-button");
+
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
+
+    trigger.addEventListener("click", toggleModal);
+    closeButton.addEventListener("click", toggleModal);
+    window.addEventListener("click", windowOnClick);
+};
+</script>
+
+<div class="modal_two" style="text-align: center;">
+        <h4>Here's your catch:</h4>
+        <div class="idea">
+          <p>Gaia: a self-composing music machine based on visuals of nature.</p>
+        </div>
+      <p style="margin-bottom: 2%">
+        Do you often think 'what if'?
+      </p>
+      <p>Us too. Capture your ideas as easy as writing a message, share them to bring alive.</p>
+      <ul>
+        <li>Join an ideation community of makers</li>
+        <li>Ideabot tracks and organizes for you</li>
+        <li>Access a web library of your ideas</li>
+      </ul>
+      <%#= image_tag("favicon.png", class: "avatar") %>
+        <%= render 'payment_button' %>
+      <p><%= 30 - User.all.count %> spots left this month</p>
 </div>

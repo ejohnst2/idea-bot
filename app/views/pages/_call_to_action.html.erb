@@ -1,19 +1,28 @@
 <script>
-    window.onload=function(){
-    var button = document.getElementById("fish-idea");
-    var paragraph = document.getElementById("iotd");
+  window.onload=function() {
+   var modal = document.querySelector(".modal");
+    var trigger = document.querySelector(".trigger");
+    var closeButton = document.querySelector(".close-button");
 
-    button.addEventListener("click", function(){
-    paragraph.style.display = 'none' ? '' : 'none';
-    })
-  };
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
+
+    trigger.addEventListener("click", toggleModal);
+    closeButton.addEventListener("click", toggleModal);
+    window.addEventListener("click", windowOnClick);
+};
 </script>
 
-<div id="iotd" style="display: none; text-align: center;">
-  <p>here's an idea...</p>
-  <p><%= Idea.all.sample.name  %></p>
-</div>
-
+<!-- <center><h2>ideas are only important when shared,
+<br>click to fish
+</h2></center> -->
 <div class="all">
   <div class="bowl">
     <div class="water">
@@ -197,14 +206,41 @@
     </div>
 
     <div class="fish-water"></div>
-    <button id="fish-idea">catch one</button>
-  </div>
+<!--     <a id="fish-idea" class="btn-treehouse trigger">catch one</a>
+ -->  </div>
+
 
   <div class="keytext">
-      <h2>a community of makers</h2>
-      <p>track and share product ideas,<br>powered by telegram <i class="fab fa-telegram-plane"></i></p>
-      <%= render 'payment_button' %>
-      <p>join <%= User.count %> other fish in the bowl</p>
+    <h2>Ideas are only important when shared.</h2>
+        <a class="btn-treehouse trigger">click to fish</a>
+    <p>Makers tracking and sharing ideas,<br>powered by Telegram <i class="fab fa-telegram-plane"></i>.</p>
+      <p>Join <%= User.count %> other fish in the bowl.</p>
   </div>
 </div>
+
+<div class="modal">
+  <div class="modal-content" style="text-align: center;">
+    <span class="close-button">&times;</span>
+      <h5 style="font-size: 22px;">Here's your catch!</h5>
+      <div class="idea">
+        <p>Gaia: a self-composing music machine based on visuals of nature.</p>
+      </div>
+      <div class="whatif">
+        <p style="margin-bottom: 2%">
+          Do you often think <strong>what if</strong>?
+        </p>
+        <p>
+          Us too. Capture your ideas as easy as writing a message, share them among fellow makers to bring alive.
+        </p>
+      </div>
+      <ul>
+        <li>Join an ideation community of makers.</li>
+        <li>IdeaBot tracks and organizes for you.</li>
+        <li>Access a web library of your ideas.</li>
+      </ul>
+      <%= render 'payment_button' %>
+      <p><%= 30 - User.all.count %> spots left this month</p>
+  </div>
+</div>
+
 

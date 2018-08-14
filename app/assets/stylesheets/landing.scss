@@ -13,6 +13,7 @@
   font-weight: bold;
   text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
 }
+
 .banner p {
   font-size: 25px;
   font-weight: lighter;
@@ -131,9 +132,13 @@ body {
   width: 100%;
   text-align: center;
   p{
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     margin-bottom: 1rem;
     font-size: 25px;
+  }
+  h2{
+    font-size: 30px;
+    margin-bottom: 1.5rem;
   }
   h1 {
   font-size: 40px;
@@ -820,17 +825,41 @@ body {
   }
 }
 
-#fish-idea{
-  top: 75%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 2%;
-  border-radius: 10%;
-  font-size: 16px;
-  font-family: 'Avenir Next';
-  border-color: white;
+.btn-treehousetwo {
   color: white;
-  background-color: transparent;
+  width: 50%;
+  padding: 10px 15px;
+  font-size: 20px;
+  border-radius: 4px;
+  font-family: 'Avenir Next';
+    /* font-weight: bold; */
+  background: #4e99ce;
+  transition: background 0.3s ease;
+}
+
+.btn-treehousetwo:hover {
+  opacity: 1;
+  background: #e8da43;
+  text-decoration: none;
+  color: #4e99ce;
+}
+
+.btn-treehouse {
+  color: #4e99ce;
+  width: 80%;
+  padding: 10px 15px;
+  font-size: 28px;
+  border-radius: 4px;
+    font-family: 'Avenir Next';
+    font-weight: bold;
+    background: #e8da43;
+    transition: background 0.3s ease;
+}
+.btn-treehouse:hover {
+  opacity: 1;
+  background: #4e99ce;
+  text-decoration: none;
+  color: white;
 }
 
 .thankyou{
@@ -849,9 +878,91 @@ body {
 }
 .all {
   position: fixed;
-  top: -10%;
+  top: -15%;
   left: 0;
   width: 100%;
   height: 100%;
   transform: scale(.85);
 }
+
+ul{
+  list-style: none;
+  margin: 20px 0px;
+  li{
+    font-size: 18px;
+  }
+}
+
+.idea {
+  padding: 3px;
+  font-size: 22px;
+  margin: 10px 0px 20px 0px;
+  color: white;
+  background-color: blue;
+  border-radius: 10px;
+  background-color: #F2ABBA;
+}
+
+.whatif{
+  font-size: 22px;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal h1{
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+}
+
+.modal h2{
+   margin: 0.3em 0 1em 0;
+   text-align: center;
+   font-size: 1em;
+   color: #999;
+   font-weight: normal;
+ }
+
+ .modal p{
+  line-height: 1.5;
+  width: 100
+ }
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 1rem 1.5rem;
+        width: 24rem;
+        border-radius: 0.5rem;
+    }
+    .close-button {
+        float: right;
+        width: 1.5rem;
+        line-height: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        background-color: lightgray;
+    }
+    .close-button:hover {
+        background-color: darkgray;
+    }
+    .show-modal {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1.0);
+        transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+    }
