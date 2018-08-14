@@ -106,6 +106,18 @@ Prepend with /email and make sure its the same as you used for payment.)
     respond_with :message, text: "#{User.count} users, #{Idea.count} ideas."
   end
 
+  def unsubscribe(*)
+    respond_with :message, text: "Hate to see you go. But hey, if you don't wanna stay can't force you 👋", reply_markup: {
+      inline_keyboard: [
+        [{text: "I'm sure I want to unsubscribe", url: ENV.fetch('TELEGRAM_GROUP_LINK')}],
+      ],
+    }
+
+    # match the email from the user with the stripe email
+    # cancel the charges associated with that email address
+    # remove user from the group
+  end
+
   def ideas(*)
     lines = user.ideas.order(created_at: :desc).collect do |idea|
       "#{time_ago_in_words idea.created_at} ago – #{idea.name || "(no description)"}"
