@@ -83,7 +83,8 @@ Type /instructions if you need a refresher on commands
 
   def message(*)
     # checks if theres a photo, and creates an idea if there is
-    if photo?
+    if photo? && payload["caption"].present?
+      respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
       create_photo_idea
       notify_new_idea
     end
