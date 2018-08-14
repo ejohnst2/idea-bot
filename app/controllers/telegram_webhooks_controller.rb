@@ -18,6 +18,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         respond_with :message, text: "Hmmm, doesn't seem like anything there..."
     else
       user.ideas.create name: idea_trimmed_string
+      on_fire
       notify_new_idea
       respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
     end
@@ -27,7 +28,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     if User.exists?(username: user.username)
       puts %(user #{user.username} tried triggering /start again)
       respond_with :message, text: "You're already a member, welcome back 👋! Here is a little refresher..."
-      respond_with :message, text: instructions
+      instructions
     else
       email_collection
     end
@@ -61,11 +62,24 @@ Prepend with /email and make sure its the same as you used for payment.)
     }
   end
 
-    def instructions(*)
-    %(Type /ideas to see all the ideas you've eaten.
-Type /link to get a secret link to your private profile
-Type /instructions if you need a refresher on commands
+  def instructions(*)
+    instructions = %(
+There are two ways to log an idea:
+1. Type /idea followed by your idea text (without photo)
+2. Send a photo with a written caption (with photo)
+
+Ideation Support:
+1. /recent to see your most recent 10 ideas
+2. /inspiration for a goodybag of ideas from the community
+3. /library for the link to your web library of ideas profile
+4. /instructions if you need a refresher on commands
+
+Metrics:
+1. /count to see how many ideas you've logged individually
+2. /botstats to see how many ideas the community has logged
+
       )
+  respond_with :message, text: instructions
   end
 
 
@@ -87,6 +101,7 @@ Type /instructions if you need a refresher on commands
       respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
       create_photo_idea
       notify_new_idea
+      respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
     end
   end
 
@@ -97,7 +112,7 @@ Type /instructions if you need a refresher on commands
     if previous_idea_at
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-        text: %(💡 @#{user.username} shared a new idea! Previous idea was #{time_ago_in_words(previous_idea_at)} ago)
+        text: %(💡@#{user.username} shared a new idea!)
       )
       else
         %(💡 @#{user.username} shared their first idea!)
@@ -110,7 +125,7 @@ Type /instructions if you need a refresher on commands
                       created_at: payload_timestamp
   end
 
-  def link(*)
+  def library(*)
     respond_with :message, text: user_url(user, host: ENV.fetch("HOST"))
   end
 
@@ -118,9 +133,20 @@ Type /instructions if you need a refresher on commands
     respond_with :message, text: "#{User.count} users, #{Idea.count} ideas."
   end
 
-  def ideas(*)
-    lines = user.ideas.order(created_at: :desc).collect do |idea|
-      "#{time_ago_in_words idea.created_at} ago – #{idea.name || "(no description)"}"
+  def count(*)
+    respond_with :message, text: "You've logged #{user.ideas.count} ideas."
+  end
+
+  def inspiration(*)
+    respond_with :message, text: "Ready, here come the goodies 🧚🏼‍♂️..."
+    Idea.all.sample(3).each do |idea|
+      respond_with :message, text: "#{idea.name}\n🎁 from @#{idea.user.username}"
+    end
+  end
+
+  def recent(*)
+    lines = user.ideas.order(created_at: :desc).first(10).collect do |idea|
+      "#{idea.name}\nLogged #{time_ago_in_words idea.created_at} ago\n"
     end
 
     text = if lines.any?
@@ -155,6 +181,29 @@ Type /instructions if you need a refresher on commands
   # checks to make sure photo exists
   def photo?
     payload["photo"].present?
+  end
+
+  def on_fire
+    case user.ideas.count
+    when 10
+      respond_with :message, text: "Strong start, you just logged your 10th idea 🚀🚀🚀!"
+      bot.send_message(
+        chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+        text: %(@#{user.username} logged their 10th idea 🚀🚀🚀!)
+      )
+    when 50
+      respond_with :message, text: "Look at you, just logged your 50th idea 🔥🔥🔥!"
+      bot.send_message(
+        chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+        text: %(@#{user.username} logged their 50th idea 🔥🔥🔥!)
+      )
+    when 100
+      respond_with :message, text: "Wow. You just logged your 100th idea 🤤🤤🤤!"
+      bot.send_message(
+        chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+        text: %(@#{user.username} just logged their 100th idea 🤤🤤🤤!)
+      )
+    end
   end
 
   def photo_url
