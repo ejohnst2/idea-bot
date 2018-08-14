@@ -60,7 +60,7 @@ Prepend with /email and make sure its the same as you used for payment.)
 
     def instructions(*)
     %(Type /ideas to see all the ideas you've eaten.
-Type /link to get a secret link to your private profile
+Type /library for the link to your web library of ideas profile
 Type /instructions if you need a refresher on commands
       )
   end
@@ -106,7 +106,7 @@ Type /instructions if you need a refresher on commands
                       created_at: payload_timestamp
   end
 
-  def link(*)
+  def library(*)
     respond_with :message, text: user_url(user, host: ENV.fetch("HOST"))
   end
 
@@ -114,8 +114,15 @@ Type /instructions if you need a refresher on commands
     respond_with :message, text: "#{User.count} users, #{Idea.count} ideas."
   end
 
-  def ideas(*)
-    lines = user.ideas.order(created_at: :desc).collect do |idea|
+  def inspiration(*)
+    respond_with :message, text: "Ready, here come the goodies 🧚🏼‍♂️..."
+    Idea.all.sample(3).each do |idea|
+      respond_with :message, text: "From @#{idea.user.username}: #{idea.name}"
+    end
+  end
+
+  def recent(*)
+    lines = user.ideas.order(created_at: :desc).first(10).collect do |idea|
       "#{time_ago_in_words idea.created_at} ago – #{idea.name || "(no description)"}"
     end
 
