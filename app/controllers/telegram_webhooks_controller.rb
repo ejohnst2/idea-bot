@@ -98,10 +98,9 @@ Metrics:
   def message(*)
     # checks if theres a photo, and creates an idea if there is
     if photo? && payload["caption"].present?
-      respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
       create_photo_idea
-      notify_new_idea
       respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
+      notify_new_idea
     end
   end
 
