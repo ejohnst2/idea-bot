@@ -14,10 +14,13 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     # removes the prepended /idea from the string
     idea_trimmed_string = idea_payload.split(' ')[1..-1].join(' ')
 
-    user.ideas.create name: idea_trimmed_string
-
-    notify_new_idea
-    respond_with :message, text: "You logged a new idea💡! Keep ideating 🧠..."
+    if idea_trimmed_string.nil? || idea_trimmed_string.empty?
+        respond_with :message, text: "Hmmm, doesn't seem like anything there..."
+    else
+      user.ideas.create name: idea_trimmed_string
+      notify_new_idea
+      respond_with :message, text: "You logged a new idea💡! Keep ideating 🧠..."
+    end
   end
 
   def start(*)
