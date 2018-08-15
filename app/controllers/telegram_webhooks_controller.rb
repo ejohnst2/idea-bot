@@ -45,38 +45,41 @@ Prepend with /email and make sure its the same as you used for payment.)
     telegram_email = payload['text'].split(' ')[1..-1].join(' ')
     user.update email: telegram_email
     #map this up against an array of stripe emails
-    if Charge.where(email: telegram_email).exists?
+    # if Charge.where(email: telegram_email).exists?
       respond_with :message, text: welcome_message
+      instructions
       join_group!
       announce_new_group_member
-    else
-      respond_with :message, text: "Try again, must match email used for payment"
-    end
+    # else
+    #   respond_with :message, text: "Try again, must match email used for payment"
+    # end
   end
 
   def join_group!(*)
-      respond_with :message, text: "Get Started in the our community 👋", reply_markup: {
+      respond_with :message, text: "When you're ready, get started in our community 👋", reply_markup: {
       inline_keyboard: [
-        [{text: "Join Idea Dojo group", url: ENV.fetch('TELEGRAM_GROUP_LINK')}],
+        [{text: "Join ThinkFish Group", url: ENV.fetch('TELEGRAM_GROUP_LINK')}],
       ],
     }
   end
 
   def instructions(*)
     instructions = %(
-There are two ways to log an idea:
+Firstly, there are two ways I can log your idea.
 1. Type /idea followed by your idea text (without photo)
 2. Send a photo with a written caption (with photo)
 
-Ideation Support:
+I can also support you in a few ways...
 1. /recent to see your most recent 10 ideas
 2. /inspiration for a goodybag of ideas from the community
 3. /library for the link to your web library of ideas profile
 4. /instructions if you need a refresher on commands
 
-Metrics:
+...and shoot you some numbers at any time!
 1. /count to see how many ideas you've logged individually
 2. /botstats to see how many ideas the community has logged
+
+Happy ideation...
 
       )
   respond_with :message, text: instructions
@@ -215,9 +218,7 @@ Metrics:
   end
 
   def welcome_message
-    %(👋 Welcome to the #@@app_name. You're now signed up!
-
-Create a new idea by either snapping a picture and sending it to me, or use the /idea command to add a new idea without a photo. Go ahead, give it a try...
+    %(👋 Welcome to ThinkFish. You're now signed up! Read the instructions below, take me for a quick spin, and join the community for the fun stuff.
 )
   end
 end
