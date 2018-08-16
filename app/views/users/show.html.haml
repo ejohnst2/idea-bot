@@ -28,4 +28,4 @@
 
 %div.feed
   - @user.ideas.reverse.each do |idea|
-    = react_component 'Idea', { :name => idea.name, :date => idea.created_at.strftime('%F'), :imageUrl => idea.image_url }
+    = react_component 'Idea', { :name => idea.name, :date => idea.created_at, :imageUrl => idea.image_url }
