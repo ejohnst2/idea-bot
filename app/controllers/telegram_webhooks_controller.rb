@@ -20,7 +20,9 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       user.ideas.create name: idea_trimmed_string
       on_fire
       notify_new_idea
-      respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
+      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+        respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
+      end
     end
   end
 
@@ -56,7 +58,7 @@ Prepend with /email and make sure its the same as you used for payment.)
   end
 
   def join_group!(*)
-      respond_with :message, text: "When you're ready, get started in our community 👋", reply_markup: {
+      respond_with :message, text: "When you're ready, add a brief description to your Telegram profile and get started in our community 👋.", reply_markup: {
       inline_keyboard: [
         [{text: "Join ThinkFish Group", url: ENV.fetch('TELEGRAM_GROUP_LINK')}],
       ],
@@ -65,21 +67,21 @@ Prepend with /email and make sure its the same as you used for payment.)
 
   def instructions(*)
     instructions = %(
-Firstly, there are two ways I can log your idea.
-1. Type /idea followed by your idea text (without photo)
-2. Send a photo with a written caption (with photo)
+There are two ways I can log your idea!
+1. Send a photo with a caption 📸
+2. Type /idea followed by your idea text ✍️ (no photo)
 
 I can also support you in a few ways...
-1. /recent to see your most recent 10 ideas
+1. /recent to see your 10 most recent ideas
 2. /inspiration for a goodybag of ideas from the community
-3. /library for the link to your web library of ideas profile
+3. /library for the link to your web library of ideas
 4. /instructions if you need a refresher on commands
 
-...and shoot you some numbers at any time!
+...and shoot you numbers at any time!
 1. /count to see how many ideas you've logged individually
 2. /botstats to see how many ideas the community has logged
 
-Happy ideation...
+Happy ideation. Message @nicksarafa or @eli_ade with suggestions/feedback. Updates made regularly 😉.
 
       )
   respond_with :message, text: instructions
@@ -102,7 +104,9 @@ Happy ideation...
     # checks if theres a photo, and creates an idea if there is
     if photo? && payload["caption"].present?
       create_photo_idea
-      respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
+      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+        respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
+      end
       notify_new_idea
     end
   end
@@ -114,7 +118,7 @@ Happy ideation...
     if previous_idea_at
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-        text: %(💡@#{user.username} shared a new idea!)
+        text: %(@#{user.username} logged an idea💡! Keep the wheels turning 🧠.)
       )
       else
         %(💡 @#{user.username} shared their first idea!)
@@ -188,19 +192,25 @@ Happy ideation...
   def on_fire
     case user.ideas.count
     when 10
-      respond_with :message, text: "Strong start, you just logged your 10th idea 🚀🚀🚀!"
+      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+        respond_with :message, text: "Strong start, you just logged your 10th idea 🚀🚀🚀!"
+      end
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
         text: %(@#{user.username} logged their 10th idea 🚀🚀🚀!)
       )
     when 50
-      respond_with :message, text: "Look at you, just logged your 50th idea 🔥🔥🔥!"
+      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+        respond_with :message, text: "Look at you, just logged your 50th idea 🔥🔥🔥!"
+      end
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
         text: %(@#{user.username} logged their 50th idea 🔥🔥🔥!)
       )
     when 100
-      respond_with :message, text: "Wow. You just logged your 100th idea 🤤🤤🤤!"
+      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+        respond_with :message, text: "Wow. You just logged your 100th idea 🤤🤤🤤!"
+      end
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
         text: %(@#{user.username} just logged their 100th idea 🤤🤤🤤!)
