@@ -5,6 +5,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.4.1"
 
+# Generate thumbnails
+gem 'image_processing'
+gem 'fastimage'
+
 gem 'webpacker', '~> 3.5'
 gem 'react-rails', '~> 2.4.5'
 
@@ -18,7 +22,7 @@ gem "puma"
 gem "rails", "~> 5.2.0.rc1"
 gem "sass-rails", "~> 5.0"
 gem "letter_opener", group: :development
-gem "shrine"
+gem "shrine", "2.11.0"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "bootsnap", ">= 1.1.0", require: false
