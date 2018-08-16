@@ -118,7 +118,7 @@ Happy ideation...
     if previous_idea_at
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
-        text: %(@#{user.username} logged a new idea💡! Keep the wheels turning 🧠.)
+        text: %(@#{user.username} logged an idea💡! Keep the wheels turning 🧠.)
       )
       else
         %(💡 @#{user.username} shared their first idea!)
