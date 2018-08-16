@@ -20,7 +20,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       user.ideas.create name: idea_trimmed_string
       on_fire
       notify_new_idea
-      unless payload["chat"]["id"] == ENV.fetch("TELEGRAM_GROUP_ID")
+      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
         respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
       end
     end
@@ -104,7 +104,7 @@ Happy ideation...
     # checks if theres a photo, and creates an idea if there is
     if photo? && payload["caption"].present?
       create_photo_idea
-      unless payload["chat"]["id"] == ENV.fetch("TELEGRAM_GROUP_ID")
+      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
         respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
       end
       notify_new_idea
