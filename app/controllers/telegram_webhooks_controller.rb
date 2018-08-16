@@ -192,19 +192,25 @@ Happy ideation...
   def on_fire
     case user.ideas.count
     when 10
-      respond_with :message, text: "Strong start, you just logged your 10th idea 🚀🚀🚀!"
+      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+        respond_with :message, text: "Strong start, you just logged your 10th idea 🚀🚀🚀!"
+      end
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
         text: %(@#{user.username} logged their 10th idea 🚀🚀🚀!)
       )
     when 50
-      respond_with :message, text: "Look at you, just logged your 50th idea 🔥🔥🔥!"
+      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+        respond_with :message, text: "Look at you, just logged your 50th idea 🔥🔥🔥!"
+      end
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
         text: %(@#{user.username} logged their 50th idea 🔥🔥🔥!)
       )
     when 100
-      respond_with :message, text: "Wow. You just logged your 100th idea 🤤🤤🤤!"
+      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+        respond_with :message, text: "Wow. You just logged your 100th idea 🤤🤤🤤!"
+      end
       bot.send_message(
         chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
         text: %(@#{user.username} just logged their 100th idea 🤤🤤🤤!)
