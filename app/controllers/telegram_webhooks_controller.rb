@@ -58,7 +58,7 @@ Prepend with /email and make sure its the same as you used for payment.)
   end
 
   def join_group!(*)
-      respond_with :message, text: "When you're ready, get started in our community 👋", reply_markup: {
+      respond_with :message, text: "When you're ready, add a brief description to your Telegram profile and get started in our community 👋.", reply_markup: {
       inline_keyboard: [
         [{text: "Join ThinkFish Group", url: ENV.fetch('TELEGRAM_GROUP_LINK')}],
       ],
