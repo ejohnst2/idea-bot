@@ -587,28 +587,6 @@ body {
   border-radius: 20px;
 }
 
-.waves {
-  poistion: absolute;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  width: calc(100% + 50px);
-}
-
-.waves img {
-  height: 25px;
-  animation: 4s waves infinite linear;
-}
-
-@keyframes waves {
-  from {
-    margin-left: 0px;
-  }
-  to {
-    margin-left: -350px;
-  }
-}
-
 .bg {
   background: #63432e;
   position: fixed;
