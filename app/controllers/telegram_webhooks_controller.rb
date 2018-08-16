@@ -68,11 +68,11 @@ Prepend with /email and make sure its the same as you used for payment.)
   def instructions(*)
     instructions = %(
 There are two ways I can log your idea!
-1. Type /idea followed by your idea text (without photo)
-2. Send a photo with a written caption (with photo)
+1. Send a photo with a caption 📸
+2. Type /idea followed by your idea text ✍️ (no photo)
 
 I can also support you in a few ways...
-1. /recent to see your most recent 10 ideas
+1. /recent to see your 10 most recent ideas
 2. /inspiration for a goodybag of ideas from the community
 3. /library for the link to your web library of ideas
 4. /instructions if you need a refresher on commands
@@ -81,7 +81,7 @@ I can also support you in a few ways...
 1. /count to see how many ideas you've logged individually
 2. /botstats to see how many ideas the community has logged
 
-Happy ideation. Message @nicksarafa or @eli_ade with suggestions/feedback. Updates are made regularly 😉.
+Happy ideation. Message @nicksarafa or @eli_ade with suggestions/feedback. Updates made regularly 😉.
 
       )
   respond_with :message, text: instructions
