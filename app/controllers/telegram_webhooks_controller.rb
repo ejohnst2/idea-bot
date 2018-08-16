@@ -20,7 +20,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       user.ideas.create name: idea_trimmed_string
       on_fire
       notify_new_idea
-      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+      unless payload["chat"]["type"] == "supergroup"
         respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
       end
     end
@@ -104,7 +104,7 @@ Happy ideation. Message @nicksarafa or @eli_ade with suggestions/feedback. Updat
     # checks if theres a photo, and creates an idea if there is
     if photo? && payload["caption"].present?
       create_photo_idea
-      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+      unless payload["chat"]["type"] == "supergroup"
         respond_with :message, text: "You logged a new idea! Keep ideating 🧠..."
       end
       notify_new_idea
@@ -192,7 +192,7 @@ Happy ideation. Message @nicksarafa or @eli_ade with suggestions/feedback. Updat
   def on_fire
     case user.ideas.count
     when 10
-      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+      unless payload["chat"]["type"] == "supergroup"
         respond_with :message, text: "Strong start, you just logged your 10th idea 🚀🚀🚀!"
       end
       bot.send_message(
@@ -200,7 +200,7 @@ Happy ideation. Message @nicksarafa or @eli_ade with suggestions/feedback. Updat
         text: %(@#{user.username} logged their 10th idea 🚀🚀🚀!)
       )
     when 50
-      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+      unless payload["chat"]["type"] == "supergroup"
         respond_with :message, text: "Look at you, just logged your 50th idea 🔥🔥🔥!"
       end
       bot.send_message(
@@ -208,7 +208,7 @@ Happy ideation. Message @nicksarafa or @eli_ade with suggestions/feedback. Updat
         text: %(@#{user.username} logged their 50th idea 🔥🔥🔥!)
       )
     when 100
-      unless payload["chat"]["id"] == ENV.fetch('TELEGRAM_GROUP_ID')
+      unless payload["chat"]["type"] == "supergroup"
         respond_with :message, text: "Wow. You just logged your 100th idea 🤤🤤🤤!"
       end
       bot.send_message(
