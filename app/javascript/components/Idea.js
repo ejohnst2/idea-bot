@@ -23,12 +23,18 @@ const Flex = styled.div`
 `;
 
 class Idea extends Component {
+  componentWillMount() {
+    if (this.props.imageData) {
+      let imageData = JSON.parse(this.props.imageData);
+
+      this.setState({
+        height: imageData.metadata.height,
+        width: imageData.metadata.width
+      });
+    }
+  }
+
   render() {
-    let imageData = JSON.parse(this.props.imageData);
-
-    let width = imageData.metadata.width || null;
-    let height = imageData.metadata.height || null;
-
     const TimeStamp = ({ date }) => {
       return (
         <STimeStamp>
@@ -43,12 +49,12 @@ class Idea extends Component {
           <Image
             alt={this.props.name}
             src={this.props.imageUrl}
-            width={width}
-            height={height}
+            height={this.state.height}
+            width={this.state.width}
             resizeMode={"contain"}
           />
           <Flex>
-            <Name>{this.props.name}</Name>
+            <Name>💡 {this.props.name}</Name>
             <TimeStamp />
           </Flex>
         </div>
