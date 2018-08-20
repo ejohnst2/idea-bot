@@ -6,6 +6,8 @@ import Moment from "react-moment";
 const Image = styled.img`
   align-self: stretch;
   flex: 1;
+  height: 100%;
+  width: 100%;
 `;
 
 const Name = styled.div``;

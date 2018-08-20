@@ -4,6 +4,14 @@ import styled from "styled-components";
 
 import Idea from "./Idea";
 
+const __feed = styled.div`
+  flex-grow: 1;
+  margin: 0 auto;
+  max-width: 600px;
+  position: relative;
+  width: 100%;
+`
+
 const __buttonContainer = styled.div`
   align-items: center;
   display: flex;
@@ -19,7 +27,7 @@ const __flexContainer = styled.div`
   flex-flow: row wrap;
   padding: 0.75em;
 
-  @media(max-width: 700px) {
+  @media(max-width: 640px) {
     justify-content: center;
   }
 
@@ -36,7 +44,7 @@ const __gridButton = styled.div`
   cursor: pointer;
   background: ${props => (props.isGrid ? "green" : "initial")};
 
-  @media(max-width: 700px) {
+  @media(max-width: 640px) {
     flex-grow: 1;
   }
 `;
@@ -45,7 +53,7 @@ const __listButton = styled.div`
   cursor: pointer;
   background: ${props => (props.isGrid ? "initial" : "green")};
 
-  @media(max-width: 700px) {
+  @media(max-width: 640px) {
     flex-grow: 1;
   }
 `;
@@ -128,7 +136,7 @@ class Feed extends Component {
 
   render() {
     return (
-      <div>
+      <__feed>
         <div>
           <__buttonContainer>
             <__gridButton
@@ -157,7 +165,7 @@ class Feed extends Component {
             />
           ))}
         </__grid>
-      </div>
+      </__feed>
     );
   }
 }
