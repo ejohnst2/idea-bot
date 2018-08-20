@@ -15,6 +15,8 @@ const __buttonContainer = styled.div`
 const __flexContainer = styled.div`
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
   padding: 0.75em;
 
   @media(max-width: 700px) {
@@ -101,6 +103,7 @@ function ListButton() {
 const __grid = styled.div`
   display: flex;
   flex-direction: ${props => (props.isGrid ? "row" : "column")};
+  flex-wrap: wrap;
 `;
 
 class Feed extends Component {
@@ -112,18 +115,15 @@ class Feed extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.ideas);
     let renderIdeas = this.props.ideas;
   }
 
   handleGridButtonClick() {
     this.setState({ isGrid: true });
-    console.log("gridButtonClick", this.state.isGrid);
   }
 
   handleListButtonClick() {
     this.setState({ isGrid: false });
-    console.log("listButtonClick", this.state.isGrid);
   }
 
   render() {
@@ -151,9 +151,9 @@ class Feed extends Component {
             <Idea
               key={idea.id}
               name={idea.name}
-              imageUrl={idea.imageUrl}
-              date={idea.date}
-              imageData={idea.imageData}
+              imageUrl={idea.image_url}
+              date={idea.created_at}
+              imageData={idea.image_data}
             />
           ))}
         </__grid>

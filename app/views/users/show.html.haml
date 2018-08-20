@@ -26,4 +26,4 @@
 
 %div.name= '@' + @user.username + ' ideas'
 
-= react_component 'Feed', { :ideas => @user.ideas }
+= react_component 'Feed', { :ideas => @user.ideas.reverse }
