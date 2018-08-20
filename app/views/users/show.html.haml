@@ -26,6 +26,8 @@
 
 %div.name= '@' + @user.username + ' ideas'
 
+= react_component('Feed')
+
 %div.feed
   - if @user.ideas.count == 0
     %div.alert= 'No ideas yet! Log your first idea via the Idea Bot to start your library'
