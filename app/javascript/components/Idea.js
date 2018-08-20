@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Moment from "react-moment";
 
+const __idea = styled.div`
+  margin-bottom: 60px;
+`
+
 const Image = styled.img`
   align-self: stretch;
   flex: 1;
@@ -13,11 +17,8 @@ const Image = styled.img`
 const Name = styled.div``;
 
 const STimeStamp = styled.div`
-  align-items: center;
   color: #bbb;
-  display: flex;
   font-size: 0.7em;
-  padding-left: 0.3em;
 `;
 
 const Flex = styled.div`
@@ -47,26 +48,28 @@ class Idea extends Component {
 
     if (this.props.imageUrl) {
       return (
-        <div>
-          <Image
-            alt={this.props.name}
-            src={this.props.imageUrl}
-            height={this.state.height}
-            width={this.state.width}
-            resizeMode={"contain"}
-          />
-          <Flex>
-            <Name>💡 {this.props.name}</Name>
+        <__idea>
+          <div>
+            <Image
+              alt={this.props.name}
+              src={this.props.imageUrl}
+              height={this.state.height}
+              width={this.state.width}
+              resizeMode={"contain"}
+            />
+          </div>
+          <div>
+            <Name>{this.props.name}</Name>
             <TimeStamp />
-          </Flex>
-        </div>
+          </div>
+        </__idea>
       );
     } else {
       return (
-        <Flex>
-          <Name>💡 {this.props.name}</Name>
+        <__idea>
+          <Name>{this.props.name}</Name>
           <TimeStamp />
-        </Flex>
+        </__idea>
       );
     }
   }
