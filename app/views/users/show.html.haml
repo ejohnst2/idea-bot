@@ -27,5 +27,8 @@
 %div.name= '@' + @user.username + ' ideas'
 
 %div.feed
-  - @user.ideas.reverse.each do |idea|
-    = react_component 'Idea', { :name => idea.name, :date => idea.created_at, :imageUrl => idea.image_url, :imageData => idea.image_data }
+  - if @user.ideas.count == 0
+    %div.alert= 'No ideas yet! Log your first idea via the Idea Bot to start your library'
+  - else
+    - @user.ideas.reverse.each do |idea|
+      = react_component 'Idea', { :name => idea.name, :date => idea.created_at, :imageUrl => idea.image_url, :imageData => idea.image_data }
