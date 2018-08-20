@@ -3,8 +3,17 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Moment from "react-moment";
 
+const __description = styled.div`
+  padding: 8px 16px;
+`
+
 const __idea = styled.div`
   margin-bottom: 60px;
+
+  @media(min-width: 640px) {
+    border-radius: 3px;
+    border: 1px solid #e6e6e6;
+  }
 `
 
 const Image = styled.img`
@@ -58,10 +67,10 @@ class Idea extends Component {
               resizeMode={"contain"}
             />
           </div>
-          <div>
+          <__description>
             <Name>{this.props.name}</Name>
             <TimeStamp />
-          </div>
+          </__description>
         </__idea>
       );
     } else {
