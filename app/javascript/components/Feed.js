@@ -17,6 +17,10 @@ const __flexContainer = styled.div`
   display: flex;
   padding: 0.75em;
 
+  @media(max-width: 700px) {
+    justify-content: center;
+  }
+
   > span {
     padding-left: 0.5em;
   }
@@ -29,11 +33,19 @@ const __break = styled.div`
 const __gridButton = styled.div`
   cursor: pointer;
   background: ${props => (props.isGrid ? "green" : "initial")};
+
+  @media(max-width: 700px) {
+    flex-grow: 1;
+  }
 `;
 
 const __listButton = styled.div`
   cursor: pointer;
   background: ${props => (props.isGrid ? "initial" : "green")};
+
+  @media(max-width: 700px) {
+    flex-grow: 1;
+  }
 `;
 
 function GridButton() {
