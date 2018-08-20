@@ -27,7 +27,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def start(*)
-    if user.ideas.count == 0
+    if user.email.nil?
       email_collection
     else
       puts %(user #{user.username} tried triggering /start again)
