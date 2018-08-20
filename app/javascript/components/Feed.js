@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { Idea } from "./Idea";
+import Idea from "./Idea";
 
 const __buttonContainer = styled.div`
   align-items: center;
@@ -20,11 +20,11 @@ const __flexContainer = styled.div`
   > span {
     padding-left: 0.5em;
   }
-`
+`;
 
 const __break = styled.div`
   padding: 0 0.35em;
-`
+`;
 
 const __gridButton = styled.div`
   cursor: pointer;
@@ -46,9 +46,9 @@ function GridButton() {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <rect x="3" y="3" width="7" height="7" />
         <rect x="14" y="3" width="7" height="7" />
@@ -70,9 +70,9 @@ function ListButton() {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <line x1="8" y1="6" x2="21" y2="6" />
         <line x1="8" y1="12" x2="21" y2="12" />
@@ -97,6 +97,11 @@ class Feed extends Component {
     this.state = {
       isGrid: true
     };
+  }
+
+  componentWillMount() {
+    console.log(this.props.ideas);
+    let renderIdeas = this.props.ideas;
   }
 
   handleGridButtonClick() {
@@ -129,14 +134,25 @@ class Feed extends Component {
             </__listButton>
           </__buttonContainer>
         </div>
-        <__grid isGrid={this.state.isGrid} />
+        <__grid isGrid={this.state.isGrid}>
+          {this.props.ideas.map(idea => (
+            <Idea
+              key={idea.id}
+              name={idea.name}
+              imageUrl={idea.imageUrl}
+              date={idea.date}
+              imageData={idea.imageData}
+            />
+          ))}
+        </__grid>
       </div>
     );
   }
 }
 
 Feed.propTypes = {
-  isGrid: PropTypes.bool
+  isGrid: PropTypes.bool,
+  ideas: PropTypes.array
 };
 
 export default Feed;
