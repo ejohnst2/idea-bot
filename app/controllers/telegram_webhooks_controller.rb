@@ -6,7 +6,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   Rails.application.routes.default_url_options[:host] = ENV.fetch("HOST")
 
-  @@app_name = "idea dojo"
+  @@app_name = "ThinkFish"
 
   def idea(*)
     idea_payload = self.payload["text"]
@@ -15,7 +15,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     idea_trimmed_string = idea_payload.split(' ')[1..-1].join(' ')
 
     if idea_trimmed_string.nil? || idea_trimmed_string.empty?
-        respond_with :message, text: "Hmmm, doesn't seem like anything there..."
+      respond_with :message, text: "Hmmm, doesn't seem like anything there..."
     else
       user.ideas.create name: idea_trimmed_string
       on_fire
@@ -27,12 +27,12 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def start(*)
-    if User.exists?(username: user.username)
+    if user.ideas.count == 0
+      email_collection
+    else
       puts %(user #{user.username} tried triggering /start again)
       respond_with :message, text: "You're already a member, welcome back 👋! Here is a little refresher..."
       instructions
-    else
-      email_collection
     end
   end
 
@@ -81,7 +81,7 @@ I can also support you in a few ways...
 1. /count to see how many ideas you've logged individually
 2. /botstats to see how many ideas the community has logged
 
-Happy ideation. Message @nicksarafa or @eli_ade with suggestions/feedback. Updates made regularly 😉.
+Happy ideation. Message @nicksarafa or @elijah_ade with suggestions/feedback. Updates made regularly 😉.
 
       )
   respond_with :message, text: instructions
