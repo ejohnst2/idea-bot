@@ -4,15 +4,18 @@ import styled from "styled-components";
 import Moment from "react-moment";
 
 const Image = styled.img`
-  height: 100%;
-  width: 100%;
+  align-self: stretch;
+  flex: 1;
 `;
 
 const Name = styled.div``;
 
 const STimeStamp = styled.div`
+  align-items: center;
   color: #bbb;
+  display: flex;
   font-size: 0.7em;
+  padding-left: 0.3em;
 `;
 
 const Flex = styled.div`
@@ -21,6 +24,11 @@ const Flex = styled.div`
 
 class Idea extends Component {
   render() {
+    let imageData = JSON.parse(this.props.imageData);
+
+    let width = imageData.metadata.width || null;
+    let height = imageData.metadata.height || null;
+
     const TimeStamp = ({ date }) => {
       return (
         <STimeStamp>
@@ -32,7 +40,13 @@ class Idea extends Component {
     if (this.props.imageUrl) {
       return (
         <div>
-          <Image alt={this.props.name} src={this.props.imageUrl} />
+          <Image
+            alt={this.props.name}
+            src={this.props.imageUrl}
+            width={width}
+            height={height}
+            resizeMode={"contain"}
+          />
           <Flex>
             <Name>{this.props.name}</Name>
             <TimeStamp />
@@ -53,7 +67,8 @@ class Idea extends Component {
 Idea.propTypes = {
   name: PropTypes.string,
   imageUrl: PropTypes.string,
-  date: PropTypes.string
+  date: PropTypes.string,
+  imageData: PropTypes.string
 };
 
 export default Idea;
