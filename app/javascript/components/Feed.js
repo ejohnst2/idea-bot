@@ -121,7 +121,7 @@ class Feed extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isGrid: true
+      isGrid: false
     };
   }
 
