@@ -53,7 +53,7 @@ Prepend with /email and make sure its the same as you used for payment.)
       join_group!
       announce_new_group_member
     else
-      respond_with :message, text: "Try again, must match email used for payment"
+      respond_with :message, text: "Try again, must match email used for payment. If you haven't subscribed yet visit www.think.fish."
     end
   end
 
