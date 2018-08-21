@@ -89,15 +89,11 @@ Happy ideation. Message @nicksarafa or @elijah_ade with suggestions/feedback or 
 
   # Update existing profiles with fresh info
   def refresh(*)
-    if User.exists?(username: user.username)
-      user.update username: payload["from"]["username"]
-      user.update firstname: payload["from"]["first_name"]
-      user.update lastname: payload["from"]["last_name"]
+    user.update username: payload["from"]["username"]
+    user.update firstname: payload["from"]["first_name"]
+    user.update lastname: payload["from"]["last_name"]
 
-      respond_with :message, text: "Updated your profile 💁"
-    else
-      respond_with :message, text: "Please sign up to refresh your profile"
-    end
+    respond_with :message, text: "Updated your profile 💁"
   end
 
 
