@@ -4,13 +4,17 @@ import styled from "styled-components";
 
 import Idea from "./Idea";
 
+const __idea = styled.div`
+  max-width: ${props => (props.isGrid ? "200px" : "none")};
+`;
+
 const __feed = styled.div`
   flex-grow: 1;
   margin: 0 auto;
   max-width: 600px;
   position: relative;
   width: 100%;
-`
+`;
 
 const __buttonContainer = styled.div`
   align-items: center;
@@ -27,7 +31,7 @@ const __flexContainer = styled.div`
   flex-flow: row wrap;
   padding: 0.75em;
 
-  @media(max-width: 640px) {
+  @media (max-width: 640px) {
     justify-content: center;
   }
 
@@ -44,7 +48,7 @@ const __gridButton = styled.div`
   cursor: pointer;
   background: ${props => (props.isGrid ? "green" : "initial")};
 
-  @media(max-width: 640px) {
+  @media (max-width: 640px) {
     flex-grow: 1;
   }
 `;
@@ -53,7 +57,7 @@ const __listButton = styled.div`
   cursor: pointer;
   background: ${props => (props.isGrid ? "initial" : "green")};
 
-  @media(max-width: 640px) {
+  @media (max-width: 640px) {
     flex-grow: 1;
   }
 `;
@@ -156,13 +160,15 @@ class Feed extends Component {
         </div>
         <__grid isGrid={this.state.isGrid}>
           {this.props.ideas.map(idea => (
-            <Idea
-              key={idea.id}
-              name={idea.name}
-              imageUrl={idea.image_url}
-              date={idea.created_at}
-              imageData={idea.image_data}
-            />
+            <__idea isGrid={this.state.isGrid}>
+              <Idea
+                key={idea.id}
+                name={idea.name}
+                imageUrl={idea.image_url}
+                date={idea.created_at}
+                imageData={idea.image_data}
+              />
+            </__idea>
           ))}
         </__grid>
       </__feed>
