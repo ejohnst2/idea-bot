@@ -184,6 +184,27 @@ Happy ideation. Message @nicksarafa or @elijah_ade with suggestions/feedback. Up
     Time.zone.at payload["date"]
   end
 
+  def one_idea_per_day
+    idea_inspiration = [
+        "Be less curious about people and more curious about ideas. - Marie Curie",
+        "The best way to have a good idea is to have a lot of ideas. - Linus Pauling",
+        "No Matter What People Tell You, Words And Ideas Can Change The World. – Robin Williams",
+        "No Matter What People Tell You, Words And Ideas Can Change The World. – Robin Williams",
+        "If at first, the idea is not absurd, then there is no hope for it. - Albert Einstein",
+        "I can’t understand why people are frightened of new ideas. I’m frightened of the old ones. - John Cage",
+        "An idea is salvation by imagination. - Frank Lloyd Wright",
+        "An idea, like a ghost, must be spoken to a little before it will explain itself. - Charles Dickens",
+        "Capital isn’t that important in business. Experience isn’t that important. You can get both of these things. What is important is ideas. - Harvey Firestone"
+    ]
+
+    chat = self.chat
+    bot.send_message(
+        chat_id: ENV.fetch("TELEGRAM_GROUP_ID"),
+        text: idea_inspiration.sample,
+        text: "Hey y'all! An idea a day keeps the doctor away. Look around you, be inspired, snap a pic, log your idea!"
+      )
+  end
+
   # checks to make sure photo exists
   def photo?
     payload["photo"].present?

@@ -13,6 +13,7 @@ gem 'webpacker', '~> 3.5'
 gem 'react-rails', '~> 2.4.5'
 
 gem "stripe"
+gem 'whenever', require: false
 gem "aws-sdk-s3", "~> 1.2"
 gem "coffee-rails", "~> 4.2"
 gem "haml-rails"
