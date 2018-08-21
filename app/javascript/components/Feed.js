@@ -6,7 +6,8 @@ import Idea from "./Idea";
 
 const __idea = styled.div`
   min-height: 200px;
-  flex-grow: 1
+  flex-grow: 1;
+  max-width: ${props => (props.isGrid ? "30vw" : "none")};
 `;
 
 const __feed = styled.div`
