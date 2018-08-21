@@ -94,7 +94,7 @@ Happy ideation. Message @nicksarafa or @elijah_ade with suggestions/feedback or 
       user.update firstname: payload["from"]["first_name"]
       user.update lastname: payload["from"]["last_name"]
 
-      respond_with :message, text: "Updating your profile 💁"
+      respond_with :message, text: "Updated your profile 💁"
     else
       respond_with :message, text: "Please sign up to refresh your profile"
     end
