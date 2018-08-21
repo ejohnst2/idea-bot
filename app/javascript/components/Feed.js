@@ -5,9 +5,8 @@ import styled from "styled-components";
 import Idea from "./Idea";
 
 const __idea = styled.div`
-  min-width: 200px;
   min-height: 200px;
-  max-width: ${props => (props.isGrid ? "200px" : "none")};
+  flex-grow: 1
 `;
 
 const __feed = styled.div`
