@@ -87,6 +87,20 @@ Happy ideation. Message @nicksarafa or @elijah_ade with suggestions/feedback or 
   respond_with :message, text: instructions
   end
 
+  # Update existing profiles with fresh info
+  def refresh(*)
+    if User.exists?(username: user.username)
+      user.update username: payload["from"]["username"]
+      user.update firstname: payload["from"]["first_name"]
+      user.update lastname: payload["from"]["last_name"]
+
+      respond_with :message, text: "Updating your profile 💁"
+    end
+    else
+      respond_with :message, text: "Please sign up to refresh your profile"
+    end
+  end
+
 
   def announce_new_group_member(*)
     if User.exists?(username: user.username)
@@ -173,6 +187,8 @@ Happy ideation. Message @nicksarafa or @elijah_ade with suggestions/feedback or 
   def user
     user = User.where(telegram_id: payload["from"]["id"]).first_or_create
     user.update username: payload["from"]["username"]
+    user.update firstname: payload["from"]["first_name"]
+    user.update lastname: payload["from"]["first_name"]
     user
   end
 
