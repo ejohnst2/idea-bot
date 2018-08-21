@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Idea from "./Idea";
 
 const __idea = styled.div`
+  min-width: 200px;
+  min-height: 200px;
   max-width: ${props => (props.isGrid ? "200px" : "none")};
 `;
 
@@ -22,6 +24,7 @@ const __buttonContainer = styled.div`
   flex-direction: row;
   flex-grow: 1;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 const __flexContainer = styled.div`
@@ -40,13 +43,9 @@ const __flexContainer = styled.div`
   }
 `;
 
-const __break = styled.div`
-  padding: 0 0.35em;
-`;
-
 const __gridButton = styled.div`
   cursor: pointer;
-  background: ${props => (props.isGrid ? "green" : "initial")};
+  background: ${props => (props.isGrid ? "#E7E7E7" : "initial")};
 
   @media (max-width: 640px) {
     flex-grow: 1;
@@ -55,7 +54,7 @@ const __gridButton = styled.div`
 
 const __listButton = styled.div`
   cursor: pointer;
-  background: ${props => (props.isGrid ? "initial" : "green")};
+  background: ${props => (props.isGrid ? "initial" : "#E7E7E7")};
 
   @media (max-width: 640px) {
     flex-grow: 1;
@@ -149,7 +148,6 @@ class Feed extends Component {
             >
               <GridButton />
             </__gridButton>
-            <__break />
             <__listButton
               onClick={this.handleListButtonClick.bind(this)}
               isGrid={this.state.isGrid}

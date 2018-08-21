@@ -7,6 +7,7 @@ const __description = styled.div`
   padding: 8px 16px;
 `
 
+// common styles shared between image, and word ideas
 const __idea = styled.div`
   margin-bottom: 60px;
 
@@ -14,6 +15,10 @@ const __idea = styled.div`
     border-radius: 3px;
     border: 1px solid #e6e6e6;
   }
+`
+
+// word idea specific styles
+const __wordIdea = __idea.extend`
 `
 
 const Image = styled.img`
@@ -28,6 +33,7 @@ const Name = styled.div``;
 const STimeStamp = styled.div`
   color: #bbb;
   font-size: 0.7em;
+  padding: 0.2em 0;
 `;
 
 const Flex = styled.div`
@@ -75,10 +81,12 @@ class Idea extends Component {
       );
     } else {
       return (
-        <__idea>
-          <Name>{this.props.name}</Name>
-          <TimeStamp />
-        </__idea>
+        <__wordIdea>
+          <div style={{ padding: "20px" }}>
+            <Name>{this.props.name}</Name>
+            <TimeStamp />
+          </div>
+        </__wordIdea>
       );
     }
   }
