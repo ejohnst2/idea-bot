@@ -26,6 +26,4 @@
 
 %div.name= '@' + @user.username + ' ideas'
 
-%div.feed
-  - @user.ideas.reverse.each do |idea|
-    = react_component 'Idea', { :name => idea.name, :date => idea.created_at, :imageUrl => idea.image_url, :imageData => idea.image_data }
+= react_component 'Feed', { :ideas => @user.ideas.reverse }
