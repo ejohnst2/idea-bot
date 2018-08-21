@@ -142,18 +142,18 @@ class Feed extends Component {
       <__feed>
         <div>
           <__buttonContainer>
-            <__gridButton
-              onClick={this.handleGridButtonClick.bind(this)}
-              isGrid={this.state.isGrid}
-            >
-              <GridButton />
-            </__gridButton>
             <__listButton
               onClick={this.handleListButtonClick.bind(this)}
               isGrid={this.state.isGrid}
             >
               <ListButton />
             </__listButton>
+            <__gridButton
+              onClick={this.handleGridButtonClick.bind(this)}
+              isGrid={this.state.isGrid}
+            >
+              <GridButton />
+            </__gridButton>
           </__buttonContainer>
         </div>
         <__grid isGrid={this.state.isGrid}>
