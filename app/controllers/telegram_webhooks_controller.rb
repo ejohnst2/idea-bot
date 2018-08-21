@@ -95,7 +95,6 @@ Happy ideation. Message @nicksarafa or @elijah_ade with suggestions/feedback or 
       user.update lastname: payload["from"]["last_name"]
 
       respond_with :message, text: "Updating your profile 💁"
-    end
     else
       respond_with :message, text: "Please sign up to refresh your profile"
     end
@@ -188,7 +187,7 @@ Happy ideation. Message @nicksarafa or @elijah_ade with suggestions/feedback or 
     user = User.where(telegram_id: payload["from"]["id"]).first_or_create
     user.update username: payload["from"]["username"]
     user.update firstname: payload["from"]["first_name"]
-    user.update lastname: payload["from"]["first_name"]
+    user.update lastname: payload["from"]["last_name"]
     user
   end
 
