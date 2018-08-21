@@ -47,14 +47,14 @@ Prepend with /email and make sure its the same as you used for payment.)
     telegram_email = payload['text'].split(' ')[1..-1].join(' ')
     user.update email: telegram_email
     #map this up against an array of stripe emails
-    # if Charge.where(email: telegram_email).exists?
+    if Charge.where(email: telegram_email).exists?
       respond_with :message, text: welcome_message
       instructions
       join_group!
       announce_new_group_member
-    # else
-    #   respond_with :message, text: "Try again, must match email used for payment"
-    # end
+    else
+      respond_with :message, text: "Try again, must match email used for payment. If you haven't subscribed yet visit www.think.fish."
+    end
   end
 
   def join_group!(*)
@@ -81,7 +81,7 @@ I can also support you in a few ways...
 1. /count to see how many ideas you've logged individually
 2. /botstats to see how many ideas the community has logged
 
-Happy ideation. Message @nicksarafa or @elijah_ade with suggestions/feedback. Updates made regularly 😉.
+Happy ideation. Message @nicksarafa or @elijah_ade with suggestions/feedback or if you'd like to unsubscribe. Updates made regularly 😉.
 
       )
   respond_with :message, text: instructions
