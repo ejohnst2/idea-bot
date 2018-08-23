@@ -31,6 +31,13 @@ class ChargesController < ApplicationController
       :items        => [{ plan: plan.id }]
     )
 
+    ## create the charge in the db
+
+    Charge.create!(
+      :email  => params[:stripeEmail],
+      :amount => @amount
+    )
+
     ## trigger the welcome email
 
     UserMailer.welcome_email(params[:stripeEmail]).deliver_now
