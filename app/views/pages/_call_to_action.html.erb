@@ -224,20 +224,18 @@
         <%= ["a program self-composing music based on visuals of nature", "rubbish bins that sense the material put into it, fires an alarm if wrong (habit-forming through shaming) #sustainability", "plant-embedded nano-mics feeding to a program that takes everyday conversation and turns them to collaborative rap songs", "app for livestreamed street perormances, donate to the performers you like and earn coins for streaming", "AR-driven fireplace-as-a-service using #magicleap", "solar-lined railing for balconies, patios, and staircases", "collapsible bed-side lamp made of plant-based material #nomadgear"].sample %></p>
       </div>
       <div class="whatif">
-        <p style="margin-bottom: 2%">
-          Do you often think <strong>what if</strong>?
-        </p>
         <p>
-          Us too. Capture ideas as easy as snapping a message, give them life by sharing among fellow makers.
+          Capture ideas as easy as snapping a message, give them life by sharing among fellow makers.
         </p>
       </div>
       <ul>
         <li>Join an ideation community of makers.</li>
         <li>IdeaBot tracks and organizes for you.</li>
         <li>Access a web library of your ideas.</li>
-        <li>Plus more.</li>
       </ul>
-      <%= render 'charges/new' %>
+      <div class="charges-wrapper">
+        <%= render 'charges/new' %>
+      </div>
       <p><%= 377 - User.all.count %> spots left!</p>
   </div>
 </div>
