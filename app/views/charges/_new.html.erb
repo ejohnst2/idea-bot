@@ -1,4 +1,4 @@
-<%= form_tag charges_path do %>
+<%= form_tag charges_path, onclick: "ga('send', 'event', 'Join', 'Click');" do %>
   <article>
     <% if flash[:error].present? %>
       <div id="error_explanation">
@@ -18,3 +18,4 @@
           data-allow-remember-me=false
           data-locale="auto"></script>
 <% end %>
+
