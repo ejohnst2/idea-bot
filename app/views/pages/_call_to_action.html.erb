@@ -213,26 +213,27 @@
 <div class="modal">
   <div class="modal-content" style="text-align: center;">
     <span class="close-button">&times;</span>
-      <h5 style="font-size: 22px;">Here's your catch 🎣</h5>
-      <div class="idea">
+      <h5 style="font-size: 22px; margin-bottom: 10px;">Here's your catch 🎣</h5>
+<!--       <div class="idea">
         <p>
-        <%= ["a program self-composing music based on visuals of nature", "rubbish bins that sense the material put into it, fires an alarm if wrong (habit-forming through shaming) #sustainability", "plant-embedded nano-mics feeding to a program that takes everyday conversation and turns them to collaborative rap songs", "app for livestreamed street perormances, donate to the performers you like and earn coins for streaming", "AR-driven fireplace-as-a-service using #magicleap", "solar-lined railing for balconies, patios, and staircases", "collapsible bed-side lamp made of plant-based material #nomadgear"].sample %></p>
-      </div>
+        <%#= ["a program self-composing music based on visuals of nature", "rubbish bins that sense the material put into it, fires an alarm if wrong (habit-forming through shaming) #sustainability", "plant-embedded nano-mics feeding to a program that takes everyday conversation and turns them to collaborative rap songs", "app for livestreamed street perormances, donate to the performers you like and earn coins for streaming", "AR-driven fireplace-as-a-service using #magicleap", "solar-lined railing for balconies, patios, and staircases", "collapsible bed-side lamp made of plant-based material #nomadgear"].sample %></p>
+      </div> -->
       <div class="whatif">
-        <p>
-          Support your ideas with ThinkFish
+        <p style="margin-bottom: 10px;">
+          Track, improve, and execute ideas with ThinkFish
         </p>
+        <p style="color: #4e99ce;">only <%= 377 - User.all.count %> spots remain</p>
       </div>
       <ul style="text-align: left;">
         <li><strong>App:</strong> a Telegram bot tracks your ideas, provides on-demand inspiration, and populates your personal idea library.</li>
         <li><strong>Community:</strong> join makers and creators in sharing and collaborating on ideas.</li>
-        <li><strong>Reading:</strong> be included in our weekly book club to spark new ideas.</li>
+        <li><strong>Inspiration:</strong> be included in our weekly book club to spark new ideas.</li>
         <li><strong>Showcase:</strong> idea of the week gets a shoutout and idea of the month gets technical analysis from internal team.</li>
       </ul>
       <div class="charges-wrapper">
         <%= render 'charges/new' %>
       </div>
-      <p><%= 377 - User.all.count %> spots left!</p>
+      <!-- <p><%#= 377 - User.all.count %> spots left!</p> -->
   </div>
 </div>
 
