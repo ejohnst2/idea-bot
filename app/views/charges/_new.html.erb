@@ -1,4 +1,11 @@
-<%= form_tag charges_path do %>
+<!--   <script>
+var btn1 = document.getElementById('btn1');
+btn1.addEventListener('click', function(){
+  console.log("bro")
+});
+</script> -->
+
+<%= form_tag charges_path, onclick: "ga('send', 'event', 'Join', 'Click');" do %>
   <article>
     <% if flash[:error].present? %>
       <div id="error_explanation">
@@ -18,3 +25,4 @@
           data-allow-remember-me=false
           data-locale="auto"></script>
 <% end %>
+
