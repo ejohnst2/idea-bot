@@ -1,6 +1,6 @@
 <script>
   window.onload=function() {
-   var modal = document.querySelector(".modal");
+    var modal = document.querySelector(".modal");
     var trigger = document.querySelector(".trigger");
     var closeButton = document.querySelector(".close-button");
 
@@ -10,6 +10,7 @@
 
     function triggerAnalytics() {
       ga('send', 'event', {
+        eventCategory: 'Purchase Modal Open',
         eventAction: 'click',
         eventLabel: 'Open Modal',
       });
