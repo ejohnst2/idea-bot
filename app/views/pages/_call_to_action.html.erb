@@ -213,31 +213,27 @@
 
 
   <div class="keytext">
-    <h2>Nurture your ideas,<br>don't forget them.</h2>
+    <h2>Nurture your ideas, never forget them.</h2>
     <a class="btn-treehouse trigger">click to fish</a>
-    <p>A community of makers<br>tracking and sharing ideas,<br>powered by Telegram <i class="fab fa-telegram-plane"></i>.</p>
+    <p>Makers, creators, and innovators tracking and sharing ideas.<br>Created with <i class="fas fa-heart"></i> by Change Init and powered with Telegram <i class="fab fa-telegram-plane"></i>.</p>
   </div>
 </div>
 
 <div class="modal">
   <div class="modal-content" style="text-align: center;">
     <span class="close-button">&times;</span>
-      <h5 style="font-size: 22px; margin-bottom: 10px;">Here's your catch 🎣</h5>
-<!--       <div class="idea">
-        <p>
-        <%#= ["a program self-composing music based on visuals of nature", "rubbish bins that sense the material put into it, fires an alarm if wrong (habit-forming through shaming) #sustainability", "plant-embedded nano-mics feeding to a program that takes everyday conversation and turns them to collaborative rap songs", "app for livestreamed street perormances, donate to the performers you like and earn coins for streaming", "AR-driven fireplace-as-a-service using #magicleap", "solar-lined railing for balconies, patios, and staircases", "collapsible bed-side lamp made of plant-based material #nomadgear"].sample %></p>
-      </div> -->
+      <p style="font-size: 22px; margin-bottom: 10px;">Here's your catch 🎣:</p>
+
+        <h5 style="font-size: 22px; margin: 10px 0px;"><%= ["a self-composing music AI based on visuals of nature", "smart bins that sense the material put into it", "a tinder-style app for airport layovers", "a wildlife-inspired cocktail bar to protect endangered species"].sample %></h5>
       <div class="whatif">
         <p style="margin-bottom: 10px;">
-          Track, improve, and execute ideas with ThinkFish
+          Track, improve, and execute ideas with ThinkFish for $5/mo.
         </p>
-        <p style="color: orange;">only <%= 377 - User.all.count %> spots remain</p>
       </div>
       <ul style="text-align: left;">
-        <li><strong>App:</strong> a Telegram bot tracks your ideas, provides on-demand inspiration, and populates your personal idea library.</li>
-        <li><strong>Community:</strong> join makers and creators in sharing and collaborating on ideas.</li>
-        <li><strong>Inspiration:</strong> be included in our weekly book club to spark new ideas.</li>
-        <li><strong>Showcase:</strong> idea of the week gets a shoutout and idea of the month gets technical analysis from internal team.</li>
+        <li><strong>Track Ideas:</strong> log ideas as simple as sending a message and populate your personal feed with IdeaBot.</li>
+        <li><strong>Discover Community:</strong> get feedback, validate ideas, and find collaborators through a global ideation community.</li>
+        <li><strong>Find Inspiration:</strong>  see community ideas, access book club and idea showcases, and receive insights that spark ideation.</li>
       </ul>
       <div class="charges-wrapper">
         <%= render 'charges/new' %>
