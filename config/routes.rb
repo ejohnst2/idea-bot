@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :charges
 
   get '/thankyou', to: 'pages#offer'
-  root to: "pages#index"
+  root to: "pages#landing"
 end
